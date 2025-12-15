@@ -1,16 +1,35 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { Header } from './shared/ui/header';
+import { MatIconRegistry } from '@angular/material/icon';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, Header],
   template: `
-    <h1>Welcome to {{ title() }}!</h1>
+    <app-header />
 
-    <router-outlet />
+    <main class="main">
+      <router-outlet />
+    </main>
   `,
-  styles: [],
+  styles: `
+    :host {
+      min-height: 100vh;
+      display: block;
+      background: var(--neutral-100);
+    }
+  `,
 })
 export class App {
-  protected readonly title = signal('devjobs-web-app');
+  #matIconRegistry = inject(MatIconRegistry);
+  #domSanitizer = inject(DomSanitizer);
+
+  constructor() {
+    this.#matIconRegistry.addSvgIconSetInNamespace(
+      'custom',
+      this.#domSanitizer.bypassSecurityTrustResourceUrl('icons/icons.svg')
+    );
+  }
 }

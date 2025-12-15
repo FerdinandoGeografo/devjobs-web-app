@@ -1,1 +1,120 @@
-/* You can add global styles to this file, and also import other style files */
+@use "../public/scss/variables";
+@use "../public/scss/base";
+@use "../public/scss/media";
+@use "../public/scss/typography";
+
+@use '@angular/material' as mat;
+
+html {
+  @include mat.theme((
+    color: (
+      primary: mat.$azure-palette,
+      tertiary: mat.$blue-palette,
+    ),
+    typography: Kumbh Sans,
+    density: 0,
+  ));
+
+  /***** BUTTON *****/
+  @include mat.button-overrides((
+    filled-container-shape: 5px,
+    filled-horizontal-padding: 3.95rem,
+    filled-icon-offset: 0,
+    filled-icon-spacing: 8px,
+    filled-touch-target-size: 4.8rem,
+    filled-container-color: var(--primary-400),
+    filled-disabled-container-color: var(--neutral-100),
+    filled-disabled-label-text-color: var(--neutral-300),
+    filled-disabled-state-layer-color: rgba(255, 255, 255, 1),
+    filled-focus-state-layer-opacity: 1,
+    filled-hover-state-layer-opacity: 1,
+    filled-label-text-color: var(--neutral-0),
+    filled-pressed-state-layer-opacity: 0,
+    filled-ripple-color: transparent,
+    filled-state-layer-color: var(--primary-100),
+    filled-label-text-size: 1.6rem,
+    filled-label-text-tracking: 0,
+    filled-label-text-weight: 700,
+    filled-container-height: 4.8rem,
+    tonal-container-shape: 5px,
+    tonal-container-color: rgba(89, 100, 224, 10%),
+    tonal-horizontal-padding: 4.05rem,
+    tonal-touch-target-size: 4.8rem,
+    tonal-disabled-label-text-color: transparent,
+    tonal-disabled-state-layer-color: transparent,
+    tonal-focus-state-layer-opacity: .35,
+    tonal-hover-state-layer-opacity: .35,
+    tonal-label-text-color: var(--primary-400),
+    tonal-pressed-state-layer-opacity: .35,
+    tonal-ripple-color: transparent,
+    tonal-state-layer-color: var(--primary-400),
+    tonal-label-text-size: 1.6rem,
+    tonal-label-text-tracking: 0,
+    tonal-label-text-weight: 700,
+    tonal-container-height: 4.8rem,
+  ));
+
+  /***** DIVIDER *****/
+  @include mat.divider-overrides((
+    color: rgba(110, 128, 152, .2),
+  ));
+
+  .mat-divider.mat-divider-vertical {
+    height: 100%;
+  }
+
+  /***** SLIDE TOGGLE *****/
+  @include mat.slide-toggle-overrides(());
+
+  /***** FORM-FIELD *****/
+  @include mat.form-field-overrides((
+    filled-container-shape: 6px,
+    filled-container-color: var(--neutral-0),
+    filled-active-indicator-height: 0,
+    filled-focus-active-indicator-height: 0,
+    filled-input-text-color: var(--primary-700),
+    filled-input-text-placeholder-color: rgba(110, 128, 152, .5),
+    container-text-line-height: 1.6rem,
+    container-text-size: 1.6rem,
+    container-text-tracking: 0,
+    container-text-weight: 400,
+    container-height: 8rem,
+  ));
+
+  /***** CHECKBOX *****/
+  @include mat.checkbox-overrides((
+    selected-focus-state-layer-opacity: 0,
+    selected-hover-state-layer-opacity: 0,
+    selected-pressed-state-layer-opacity: 0,
+    unselected-focus-state-layer-opacity: 0,
+    unselected-hover-state-layer-opacity: .25,
+    unselected-pressed-state-layer-opacity: 0,
+    selected-checkmark-color: var(--neutral-0),
+    selected-focus-icon-color: var(--primary-400),
+    selected-focus-state-layer-color: transparent,
+    selected-hover-icon-color: var(--primary-400),
+    selected-hover-state-layer-color: transparent,
+    selected-icon-color: var(--primary-400),
+    selected-pressed-icon-color: var(--primary-400),
+    selected-pressed-state-layer-color: transparent,
+    unselected-focus-icon-color: rgba(25, 32, 45, 10.35%),
+    unselected-focus-state-layer-color: transparent,
+    unselected-hover-icon-color: rgba(25, 32, 45, 10.35%),
+    unselected-hover-state-layer-color: var(--primary-400),
+    unselected-icon-color: rgba(25, 32, 45, 10.35%),
+    unselected-pressed-state-layer-color: transparent,
+    label-text-color: var(--primary-700),
+    label-text-size: 1.6rem,
+    label-text-line-height: 1,
+    label-text-tracking: 0,
+    label-text-weight: 700,
+    touch-target-size: 2.4rem,
+    touch-target-display: block,
+    state-layer-size: 2.4rem,
+  ));
+}
+
+body {
+  color-scheme: light;
+  margin: 0;
+}

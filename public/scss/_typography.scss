@@ -1,0 +1,40 @@
+body {
+  font-family: "Kumbh Sans", sans-serif;
+}
+
+.heading {
+  &--xl {
+    font-size: 2.8rem;
+    line-height: 3.4rem;
+    letter-spacing: 0;
+    font-weight: 700;
+  }
+
+  &--lg {
+    font-size: 2.4rem;
+    line-height: 2.9rem;
+    letter-spacing: 0;
+    font-weight: 700;
+  }
+
+  &--md {
+    font-size: 2rem;
+    line-height: 2.4rem;
+    letter-spacing: 0;
+    font-weight: 700;
+  }
+
+  &--sm {
+    font-size: 1.4rem;
+    line-height: 1.8rem;
+    letter-spacing: 0;
+    font-weight: 700;
+  }
+}
+
+.text {
+  font-size: 1.6rem;
+  line-height: 2.6rem;
+  letter-spacing: 0;
+  font-weight: 400;
+}
