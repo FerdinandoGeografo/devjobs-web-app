@@ -25,8 +25,8 @@ export class JobsStore {
         .concat(j.requirements.content)
         .concat(j.requirements.items.join(' '));
       return (
-        (!query || jobContent.includes(query)) &&
-        (!location || j.location.includes(location)) &&
+        (!query || jobContent.toLowerCase().includes(query.toLowerCase())) &&
+        (!location || j.location.toLowerCase().includes(location.toLowerCase())) &&
         (!fullTimeOnly || j.contract === 'Full Time')
       );
     })

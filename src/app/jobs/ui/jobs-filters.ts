@@ -68,9 +68,9 @@ import { IJobsFilters } from '../data-access/jobs-store';
             fullTimeOnly: !filter().fullTimeOnly
           })
         "
-        >Full Time Only</mat-checkbox
-      >
-
+        >
+        Full Time Only
+        </mat-checkbox>
       <button matButton="filled" (click)="searchClicked.emit(filter())">Search</button>
     </div>
   `,
