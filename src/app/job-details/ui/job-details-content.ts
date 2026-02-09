@@ -39,14 +39,16 @@ import { JobDetailsList } from './job-details-list';
 
       .job {
         padding: 4.8rem 4.3rem 4.8rem 4.8rem;
-        background: var(--neutral-0);
+        background-color: light-dark(var(--neutral-0), var(--primary-700));
         border-radius: 6px;
         display: flex;
         flex-direction: column;
         gap: 4rem;
+        transition: background-color 0.35s ease-in-out;
 
         .text {
-          color: var(--neutral-600);
+          color: light-dark(var(--neutral-600), var(--neutral-300));
+          transition: color 0.35s ease-in-out;
         }
 
         &__heading-box {
@@ -84,8 +86,9 @@ import { JobDetailsList } from './job-details-list';
 
         &__position {
           line-height: 1;
-          color: var(--primary-700);
+          color: light-dark(var(--primary-700), var(--neutral-0));
           margin-bottom: 6px;
+          transition: color 0.35s ease-in-out;
         }
 
         &__location {

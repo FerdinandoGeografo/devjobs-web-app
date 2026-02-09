@@ -20,7 +20,6 @@ import { JobsStore } from '../jobs/data-access/jobs-store';
   styles: `
     :host {
       .job {
-        margin: 4rem 0 0 0;
         display: flex;
         flex-direction: column;
         align-items: center;

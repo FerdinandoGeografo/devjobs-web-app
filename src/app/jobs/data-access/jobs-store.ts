@@ -8,13 +8,13 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   providedIn: 'root',
 })
 export class JobsStore {
-  #http = inject(HttpClient);
+  private http = inject(HttpClient);
 
-  #state = signal<JobsState>(initialState);
+  private state = signal<JobsState>(initialState);
 
-  loading = computed(() => this.#state().loading);
-  jobs = computed(() => this.#state().jobs);
-  filter = computed(() => this.#state().filter);
+  loading = computed(() => this.state().loading);
+  jobs = computed(() => this.state().jobs);
+  filter = computed(() => this.state().filter);
 
   filteredJobs = computed(() =>
     this.jobs().filter((j) => {
@@ -32,28 +32,28 @@ export class JobsStore {
     })
   );
 
-  #loadJobs = new Subject<void>();
+  private loadJobs = new Subject<void>();
 
   constructor() {
-    effect(() => console.log('State Changed:\t', this.#state()));
+    effect(() => console.log('State Changed:\t', this.state()));
 
-    this.#loadJobs
+    this.loadJobs
       .pipe(
         takeUntilDestroyed(),
-        tap(() => this.#state.update((s) => ({ ...s, loading: true }))),
+        tap(() => this.state.update((s) => ({ ...s, loading: true }))),
         switchMap(() =>
-          this.#http
+          this.http
             .get<Job[]>('data/data.json')
-            .pipe(tap((jobs) => this.#state.update((s) => ({ ...s, loading: false, jobs }))))
+            .pipe(tap((jobs) => this.state.update((s) => ({ ...s, loading: false, jobs }))))
         )
       )
       .subscribe();
 
-    this.#loadJobs.next();
+    this.loadJobs.next();
   }
 
   setFilter(filter: IJobsFilters) {
-    this.#state.update((s) => ({ ...s, filter }));
+    this.state.update((s) => ({ ...s, filter }));
   }
 }
 

@@ -26,12 +26,13 @@ import { RouterLink } from '@angular/router';
     :host {
       padding: 4.9rem 3.2rem 3.2rem;
       border-radius: 6px;
-      background: var(--neutral-0);
+      background-color: light-dark(var(--neutral-0), var(--primary-700));
       display: flex;
       flex-direction: column;
       align-items: start;
       gap: 4.4rem;
       position: relative;
+      transition: background-color .35s ease-in-out;
 
       .job {
         &__logo {
@@ -43,7 +44,7 @@ import { RouterLink } from '@angular/router';
           justify-content: center;
           width: 5rem;
           height: 5rem;
-          border-radius: 1rem;
+          border-radius: 1.5rem;
           transform: translateY(-50%);
         }
 
@@ -69,8 +70,9 @@ import { RouterLink } from '@angular/router';
 
         &__position {
           line-height: 1;
-          color: var(--primary-700);
+          color: light-dark(var(--primary-700), var(--neutral-0));
           margin: 1.3rem 0 1.7rem;
+          transition: color .35s ease-in-out;
         }
 
         &__company {

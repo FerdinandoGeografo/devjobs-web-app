@@ -18,7 +18,7 @@ import { IJobsFilters } from '../data-access/jobs-store';
     MatDividerModule,
   ],
   template: `
-    <mat-form-field [style.flex]="1" subscriptSizing="dynamic" appearance="fill">
+    <mat-form-field class="filters__query" subscriptSizing="dynamic" appearance="fill">
       <input
         type="text"
         matInput
@@ -29,7 +29,7 @@ import { IJobsFilters } from '../data-access/jobs-store';
           filter.set({
             query: query.value,
             location: location.value,
-            fullTimeOnly: !filter().fullTimeOnly
+            fullTimeOnly: filter().fullTimeOnly
           })
         "
       />
@@ -38,7 +38,7 @@ import { IJobsFilters } from '../data-access/jobs-store';
 
     <mat-divider vertical />
 
-    <mat-form-field [style.flex]="1" subscriptSizing="dynamic" appearance="fill">
+    <mat-form-field class="filters__location" subscriptSizing="dynamic" appearance="fill">
       <input
         type="text"
         matInput
@@ -58,7 +58,7 @@ import { IJobsFilters } from '../data-access/jobs-store';
 
     <mat-divider vertical />
 
-    <div class="filters__end" [style.flex]="1">
+    <div class="filters__end">
       <mat-checkbox
         [checked]="filter().fullTimeOnly"
         (change)="
@@ -68,25 +68,56 @@ import { IJobsFilters } from '../data-access/jobs-store';
             fullTimeOnly: !filter().fullTimeOnly
           })
         "
-        >
+      >
         Full Time Only
-        </mat-checkbox>
+      </mat-checkbox>
       <button matButton="filled" (click)="searchClicked.emit(filter())">Search</button>
     </div>
   `,
   styles: `
+    @use '@angular/material' as mat;
+
     :host {
       border-radius: 6px;
-      background: var(--neutral-0);
+      background-color: light-dark(var(--neutral-0), var(--primary-700));
       display: flex;
       align-items: center;
       height: 8rem;
+      overflow: hidden;
+      transition: background-color .35s ease-in-out;
 
       .filters {
+        &__query {
+          flex: 1;
+
+          &::ng-deep .mat-mdc-form-field-icon-prefix .mat-icon {
+            padding: 0 1.6rem 0 3.2rem;
+          }
+        }
+
+        &__location {
+          flex: 1;
+          max-width: 30rem;
+
+          &::ng-deep .mat-mdc-form-field-icon-prefix .mat-icon {
+            width: 1.7rem;
+            height: 2.4rem;
+            padding: 0 1.6rem 0 2.3rem;
+          }
+        }
+
         &__end {
+          padding: 0 1.6rem 0 3.2rem;
+          flex: 1;
+          max-width: 34.5rem;
           display: flex;
           align-items: center;
+          justify-content: space-between;
           gap: 2.6rem;
+
+          @include mat.button-overrides((
+            filled-horizontal-padding: 3.55rem,
+          ));
         }
       }
     }

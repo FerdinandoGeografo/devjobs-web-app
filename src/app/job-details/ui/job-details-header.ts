@@ -23,8 +23,9 @@ import { MatButtonModule } from '@angular/material/button';
     :host {
       min-width: 73rem;
       display: flex;
-      background: var(--neutral-0);
+      background-color: light-dark(var(--neutral-0), var(--primary-700));
       border-radius: 6px;
+      transition: background-color 0.35s ease-in-out;
 
       .job {
         &__logo {
@@ -54,12 +55,13 @@ import { MatButtonModule } from '@angular/material/button';
           gap: 1.3rem;
 
           .heading {
-            color: var(--primary-700);
+            color: light-dark(var(--primary-700), var(--neutral-0));
+            transition: color 0.35s ease-in-out;
           }
 
           .text {
             line-height: 1;
-            color: var(--neutral-600)
+            color: var(--neutral-600);
           }
         }
       }

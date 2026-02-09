@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
@@ -11,7 +11,12 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
         <img src="images/desktop/logo.svg" alt="Devjobs app logo image" />
         <div class="header__slider-box">
           <mat-icon svgIcon="custom:sun" />
-          <mat-slide-toggle disableRipple hideIcon />
+          <mat-slide-toggle
+            disableRipple
+            hideIcon
+            [checked]="darkTheme()"
+            (change)="themeToggled.emit()"
+          />
           <mat-icon svgIcon="custom:moon" />
         </div>
       </div>
@@ -53,4 +58,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     }
   `,
 })
-export class Header {}
+export class Header {
+  darkTheme = input.required<boolean>();
+  themeToggled = output<void>();
+}

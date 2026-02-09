@@ -16,12 +16,14 @@ import { Job } from '../../shared/models/job';
   `,
   styles: `
     :host {
+      margin-top: 4.8rem;
       align-self: stretch;
       display: flex;
       align-items: center;
       justify-content: center;
       border-radius: 6px;
-      background: var(--neutral-0);
+      background-color: light-dark(var(--neutral-0), var(--primary-700));
+      transition: background-color 0.35s ease-in-out;
 
       .footer {
         &__content {
@@ -37,12 +39,14 @@ import { Job } from '../../shared/models/job';
           flex-direction: column;
           gap: 1.5rem;
 
-          .heading, .text {
+          .heading,
+          .text {
             line-height: 1;
           }
 
           .heading {
-            color: var(--primary-700);
+            color: light-dark(var(--primary-700), var(--neutral-0));
+            transition: color 0.35s ease-in-out;
           }
 
           .text {

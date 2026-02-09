@@ -28,21 +28,9 @@ ul {
 html {
   color-scheme: light;
   font-size: 10px;
-}
+  box-sizing: border-box;
 
-/*
-::-webkit-scrollbar {
-  width: .8rem;
-  height: .5rem;
+  &.dark {
+    color-scheme: dark;
+  }
 }
-
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-  cursor: pointer;
-  border-radius: 1rem;
-  background: var(--neutral-600);
-}
-*/

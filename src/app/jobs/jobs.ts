@@ -22,7 +22,7 @@ import { JobsStore } from './data-access/jobs-store';
         display: flex;
         flex-direction: column;
         gap: 8rem;
-        padding: 4rem 16.5rem;
+        padding: 0 16.5rem 6.4rem;
       }
     }
   `,

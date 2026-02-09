@@ -68,50 +68,104 @@ html {
 
   /***** FORM-FIELD *****/
   @include mat.form-field-overrides((
-    filled-container-shape: 6px,
-    filled-container-color: var(--neutral-0),
+    filled-container-shape: 0,
+    filled-container-color: light-dark(var(--neutral-0), var(--primary-700)),
     filled-active-indicator-height: 0,
     filled-focus-active-indicator-height: 0,
-    filled-input-text-color: var(--primary-700),
-    filled-input-text-placeholder-color: rgba(110, 128, 152, .5),
-    container-text-line-height: 1.6rem,
+    filled-input-text-color: light-dark(var(--primary-700), var(--neutral-0)),
+    filled-input-text-placeholder-color: light-dark(rgba(25, 32, 45, 0.5), rgba(255, 255, 255, .5)),
+    filled-caret-color: var(--primary-400),
+    container-text-line-height: 1.9rem,
     container-text-size: 1.6rem,
     container-text-tracking: 0,
     container-text-weight: 400,
     container-height: 8rem,
   ));
 
+  .mdc-text-field--no-label:not(.mdc-text-field--textarea) .mat-mdc-form-field-input-control.mdc-text-field__input {
+    height: 2rem;
+    transition: color .35s ease-in-out;
+
+    &::placeholder {
+      transition: color .35s;
+    }
+  }
+
+  .mdc-text-field--no-label {
+    transition: background-color .35s ease-in-out;
+
+    .mat-mdc-form-field-infix {
+      padding-top: 2.8rem;
+      padding-bottom: 3.2rem;
+    }
+  }
+
+  .mat-mdc-form-field-icon-prefix {
+    padding: 0;
+  }
+
   /***** CHECKBOX *****/
   @include mat.checkbox-overrides((
     selected-focus-state-layer-opacity: 0,
     selected-hover-state-layer-opacity: 0,
     selected-pressed-state-layer-opacity: 0,
-    unselected-focus-state-layer-opacity: 0,
-    unselected-hover-state-layer-opacity: .25,
-    unselected-pressed-state-layer-opacity: 0,
     selected-checkmark-color: var(--neutral-0),
     selected-focus-icon-color: var(--primary-400),
-    selected-focus-state-layer-color: transparent,
     selected-hover-icon-color: var(--primary-400),
-    selected-hover-state-layer-color: transparent,
     selected-icon-color: var(--primary-400),
     selected-pressed-icon-color: var(--primary-400),
-    selected-pressed-state-layer-color: transparent,
-    unselected-focus-icon-color: rgba(25, 32, 45, 10.35%),
-    unselected-focus-state-layer-color: transparent,
-    unselected-hover-icon-color: rgba(25, 32, 45, 10.35%),
+    unselected-focus-state-layer-opacity: .25,
+    unselected-hover-state-layer-opacity: .25,
+    unselected-pressed-state-layer-opacity: .25,
+    unselected-focus-state-layer-color: var(--primary-400),
+    unselected-pressed-state-layer-color: var(--primary-400),
     unselected-hover-state-layer-color: var(--primary-400),
-    unselected-icon-color: rgba(25, 32, 45, 10.35%),
-    unselected-pressed-state-layer-color: transparent,
-    label-text-color: var(--primary-700),
+    unselected-focus-icon-color: transparent,
+    unselected-hover-icon-color: transparent,
+    unselected-icon-color: light-dark(rgba(25, 32, 45, 0.135), rgba(255, 255, 255, 0.135)),
+    label-text-color: light-dark(var(--primary-700), var(--neutral-0)),
     label-text-size: 1.6rem,
-    label-text-line-height: 1,
-    label-text-tracking: 0,
+    label-text-line-height: 1.6rem,
+    label-text-tracking: -.1px,
     label-text-weight: 700,
     touch-target-size: 2.4rem,
     touch-target-display: block,
     state-layer-size: 2.4rem,
   ));
+
+  .mdc-checkbox__background {
+    height: var(--mat-checkbox-state-layer-size);
+    width: var(--mat-checkbox-state-layer-size);
+    border-width: 0;
+    border-radius: 3px;
+    top: 0;
+    left: 0;
+    background-color: var(--mat-checkbox-unselected-icon-color);
+    transition-duration: .35s;
+  }
+
+  .mdc-checkbox__checkmark {
+    --size: 1.4rem;
+    width: var(--size);
+    height: var(--size);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .mat-mdc-checkbox label {
+    padding-top: 3px;
+    padding-left: 1.6rem;
+    transition: color .35s ease-in-out;
+  }
+
+  .mat-internal-form-field {
+    align-items: start;
+  }
+
+  .mat-mdc-checkbox .mat-mdc-checkbox-ripple, .mdc-checkbox__ripple {
+    border-radius: 3px;
+  }
 
   /***** SLIDE TOGGLE *****/
   @include mat.slide-toggle-overrides((
@@ -167,6 +221,5 @@ html {
 }
 
 body {
-  color-scheme: light;
   margin: 0;
 }
