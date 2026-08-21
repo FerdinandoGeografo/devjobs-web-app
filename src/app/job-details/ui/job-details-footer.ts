@@ -1,10 +1,11 @@
-import { Component, input } from '@angular/core';
+import { Component, input, ChangeDetectionStrategy } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { Job } from '../../shared/models/job';
 
 @Component({
   selector: 'app-job-details-footer',
   imports: [MatButtonModule],
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     <div class="footer__content">
       <div class="footer__text">

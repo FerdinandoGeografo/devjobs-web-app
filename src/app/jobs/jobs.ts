@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { JobsFilters } from './ui/jobs-filters';
 import { JobsList } from './ui/jobs-list';
 import { JobsStore } from './data-access/jobs-store';
@@ -6,6 +6,7 @@ import { JobsStore } from './data-access/jobs-store';
 @Component({
   selector: 'app-jobs',
   imports: [JobsFilters, JobsList],
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     <section class="jobs">
       <app-jobs-filters

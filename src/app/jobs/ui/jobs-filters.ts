@@ -1,4 +1,4 @@
-import { Component, input, model, output } from '@angular/core';
+import { Component, input, model, output, ChangeDetectionStrategy } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDividerModule } from '@angular/material/divider';
@@ -17,6 +17,7 @@ import { IJobsFilters } from '../data-access/jobs-store';
     MatButtonModule,
     MatDividerModule,
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     <mat-form-field class="filters__query" subscriptSizing="dynamic" appearance="fill">
       <input
@@ -29,7 +30,7 @@ import { IJobsFilters } from '../data-access/jobs-store';
           filter.set({
             query: query.value,
             location: location.value,
-            fullTimeOnly: filter().fullTimeOnly
+            fullTimeOnly: filter().fullTimeOnly,
           })
         "
       />
@@ -49,7 +50,7 @@ import { IJobsFilters } from '../data-access/jobs-store';
           filter.set({
             query: query.value,
             location: location.value,
-            fullTimeOnly: filter().fullTimeOnly
+            fullTimeOnly: filter().fullTimeOnly,
           })
         "
       />
@@ -65,7 +66,7 @@ import { IJobsFilters } from '../data-access/jobs-store';
           filter.set({
             query: query.value,
             location: location.value,
-            fullTimeOnly: !filter().fullTimeOnly
+            fullTimeOnly: !filter().fullTimeOnly,
           })
         "
       >
@@ -84,7 +85,7 @@ import { IJobsFilters } from '../data-access/jobs-store';
       align-items: center;
       height: 8rem;
       overflow: hidden;
-      transition: background-color .35s ease-in-out;
+      transition: background-color 0.35s ease-in-out;
 
       .filters {
         &__query {
@@ -115,9 +116,11 @@ import { IJobsFilters } from '../data-access/jobs-store';
           justify-content: space-between;
           gap: 2.6rem;
 
-          @include mat.button-overrides((
-            filled-horizontal-padding: 3.55rem,
-          ));
+          @include mat.button-overrides(
+            (
+              filled-horizontal-padding: 3.55rem,
+            )
+          );
         }
       }
     }

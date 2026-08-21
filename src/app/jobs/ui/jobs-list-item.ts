@@ -1,10 +1,11 @@
-import { Component, input } from '@angular/core';
+import { Component, input, ChangeDetectionStrategy } from '@angular/core';
 import { Job } from '../../shared/models/job';
 import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-jobs-list-item',
   imports: [RouterLink],
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     <div class="job__logo" [style.background]="job().logoBackground">
       <img [src]="job().logo" alt="{{ job().company }}'s company logo" />
@@ -32,7 +33,7 @@ import { RouterLink } from '@angular/router';
       align-items: start;
       gap: 4.4rem;
       position: relative;
-      transition: background-color .35s ease-in-out;
+      transition: background-color 0.35s ease-in-out;
 
       .job {
         &__logo {
@@ -72,7 +73,7 @@ import { RouterLink } from '@angular/router';
           line-height: 1;
           color: light-dark(var(--primary-700), var(--neutral-0));
           margin: 1.3rem 0 1.7rem;
-          transition: color .35s ease-in-out;
+          transition: color 0.35s ease-in-out;
         }
 
         &__company {

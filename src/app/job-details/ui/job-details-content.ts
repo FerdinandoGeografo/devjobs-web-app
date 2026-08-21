@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, ChangeDetectionStrategy } from '@angular/core';
 import { Job } from '../../shared/models/job';
 import { MatAnchor } from '@angular/material/button';
 import { JobDetailsList } from './job-details-list';
@@ -6,6 +6,7 @@ import { JobDetailsList } from './job-details-list';
 @Component({
   selector: 'app-job-details-content',
   imports: [MatAnchor, JobDetailsList],
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     <article class="job">
       <div class="job__heading-box">

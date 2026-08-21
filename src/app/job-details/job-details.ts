@@ -1,4 +1,4 @@
-import { Component, computed, inject, input } from '@angular/core';
+import { Component, computed, inject, input, ChangeDetectionStrategy } from '@angular/core';
 import { JobDetailsHeader } from './ui/job-details-header';
 import { JobDetailsContent } from './ui/job-details-content';
 import { JobDetailsFooter } from './ui/job-details-footer';
@@ -8,13 +8,14 @@ import { JobsStore } from '../jobs/data-access/jobs-store';
 @Component({
   selector: 'app-job-details',
   imports: [JobDetailsHeader, JobDetailsContent, JobDetailsFooter],
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     @if (job()) {
-    <section class="job">
-      <app-job-details-header [job]="job()" />
-      <app-job-details-content [job]="job()" />
-      <app-job-details-footer [position]="job()!.position" [company]="job()!.company" />
-    </section>
+      <section class="job">
+        <app-job-details-header [job]="job()" />
+        <app-job-details-content [job]="job()" />
+        <app-job-details-footer [position]="job()!.position" [company]="job()!.company" />
+      </section>
     }
   `,
   styles: `

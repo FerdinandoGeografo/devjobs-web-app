@@ -1,9 +1,10 @@
-import { Component, input } from '@angular/core';
+import { Component, input, ChangeDetectionStrategy } from '@angular/core';
 import { JobMetadata } from '../../shared/models/job';
 
 @Component({
   selector: 'app-job-details-list',
   imports: [],
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     <p class="heading heading--md">{{ title() }}</p>
 
@@ -11,14 +12,14 @@ import { JobMetadata } from '../../shared/models/job';
       <p class="text">{{ jobMetadata().content }}</p>
       <ul class="list__list">
         @for (item of jobMetadata().items; track $index) {
-        <li class="list__item" [style.gap.px]="bulletMode() === 'point' ? 32 : 25">
-          @if (bulletMode() === 'point') {
-          <div class="list__point" aria-hidden="true"></div>
-          } @else {
-          <span class="list__num text">{{ $index }}</span>
-          }
-          <p class="text">{{ item }}</p>
-        </li>
+          <li class="list__item" [style.gap.px]="bulletMode() === 'point' ? 32 : 25">
+            @if (bulletMode() === 'point') {
+              <div class="list__point" aria-hidden="true"></div>
+            } @else {
+              <span class="list__num text">{{ $index }}</span>
+            }
+            <p class="text">{{ item }}</p>
+          </li>
         }
       </ul>
     </div>

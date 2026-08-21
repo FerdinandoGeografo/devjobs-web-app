@@ -1,10 +1,11 @@
-import { Component, input } from '@angular/core';
+import { Component, input, ChangeDetectionStrategy } from '@angular/core';
 import { Job } from '../../shared/models/job';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-job-details-header',
   imports: [MatButtonModule],
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     <div class="job__logo" [style.background]="job().logoBackground">
       <img [src]="job().logo" alt="{{ job().company }}'s logo image" />

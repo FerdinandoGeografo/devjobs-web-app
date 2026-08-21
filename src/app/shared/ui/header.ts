@@ -1,10 +1,11 @@
-import { Component, input, output } from '@angular/core';
+import { Component, input, output, ChangeDetectionStrategy } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-header',
   imports: [MatIconModule, MatSlideToggleModule],
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     <header class="header">
       <div class="header__container">
@@ -43,11 +44,11 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
           gap: 1.6rem;
 
           .mat-icon {
-            &[svgIcon="custom:sun"] {
+            &[svgIcon='custom:sun'] {
               width: 2rem;
               height: 1.86rem;
             }
-            &[svgIcon="custom:moon"] {
+            &[svgIcon='custom:moon'] {
               width: 1.2rem;
               height: 1.2rem;
               font-size: 1.2rem;
