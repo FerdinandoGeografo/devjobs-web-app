@@ -1,10 +1,10 @@
 import { computed, DOCUMENT, effect, inject, Service, signal } from '@angular/core';
 
 @Service()
-export class GlobalStore {
+export class ThemeStore {
   private document = inject(DOCUMENT);
   private darkClass = 'dark' as const;
-  private state = signal<GlobalState>(initialState);
+  private state = signal<ThemeState>(initialState);
 
   darkTheme = computed(() => this.state().darkTheme);
 
@@ -22,10 +22,10 @@ export class GlobalStore {
   }
 }
 
-export interface GlobalState {
+export interface ThemeState {
   darkTheme: boolean;
 }
 
-const initialState: GlobalState = {
-  darkTheme: false,
+const initialState: ThemeState = {
+  darkTheme: window.matchMedia('(prefers-color-scheme: dark)').matches,
 };

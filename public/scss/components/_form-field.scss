@@ -14,6 +14,7 @@ html {
     container-text-tracking: 0,
     container-text-weight: 400,
     container-height: 8rem,
+    leading-icon-color: var(--primary-400),
   ));
 
   .mdc-text-field--no-label:not(.mdc-text-field--textarea) .mat-mdc-form-field-input-control.mdc-text-field__input {

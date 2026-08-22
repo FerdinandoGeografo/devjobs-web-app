@@ -37,7 +37,7 @@ html {
     top: 0;
     left: 0;
     background-color: var(--mat-checkbox-unselected-icon-color);
-    transition-duration: .35s;
+    transition: background-color .35s ease-in-out;
   }
 
   .mdc-checkbox__checkmark {
@@ -49,10 +49,10 @@ html {
     transform: translate(-50%, -50%);
   }
 
-  .mat-mdc-checkbox label {
-    padding-top: 3px;
-    padding-left: 1.6rem;
+  .mat-mdc-checkbox .mat-internal-form-field-label {
     transition: color .35s ease-in-out;
+    margin: 3px 0 5px 0;
+    padding-left: 1.6rem;
   }
 
   .mat-internal-form-field {

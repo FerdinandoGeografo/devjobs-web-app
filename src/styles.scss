@@ -21,7 +21,6 @@ html {
     density: 0,
   ));
 
-  /***** DIVIDER *****/
   @include mat.divider-overrides((
     color: rgba(110, 128, 152, .2),
   ));
@@ -29,6 +28,16 @@ html {
   .mat-divider.mat-divider-vertical {
     height: 100%;
   }
+
+  .cdk-overlay-backdrop {
+    background: rgba(0,0,0,.5);
+  }
+
+  @include mat.dialog-overrides((
+    container-shape: 6px,
+    container-color: light-dark(var(--neutral-0), var(--primary-700)),
+    content-padding: 0,
+  ));
 }
 
 body {
