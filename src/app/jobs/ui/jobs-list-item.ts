@@ -1,41 +1,69 @@
-import { Component, input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { Job } from '../../shared/models/job';
 import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-jobs-list-item',
   imports: [RouterLink],
-  changeDetection: ChangeDetectionStrategy.Eager,
   template: `
-    <div class="job__logo" [style.background]="job().logoBackground">
-      <img [src]="job().logo" alt="{{ job().company }}'s company logo" />
-    </div>
-    <div>
-      <div class="job__data">
-        <p class="text">{{ job().postedAt }}</p>
-        <div aria-hidden="true"></div>
-        <p class="text">{{ job().contract }}</p>
+    <a
+      class="job"
+      [routerLink]="[job().id]"
+      [attr.aria-label]="job().position + ', ' + job().company"
+    >
+      <div class="job__logo" [style.background]="job().logoBackground">
+        <img [src]="job().logo" alt="" />
       </div>
-      <h2 [routerLink]="[job().id]" class="job__position heading heading--md">
-        {{ job().position }}
-      </h2>
-      <p class="job__company text">{{ job().company }}</p>
-    </div>
-    <p class="job__location heading heading--sm">{{ job().location }}</p>
+      <div>
+        <div class="job__data">
+          <p class="text">{{ job().postedAt }}</p>
+          <div aria-hidden="true"></div>
+          <p class="text">{{ job().contract }}</p>
+        </div>
+        <h2 class="heading heading--md job__position">
+          {{ job().position }}
+        </h2>
+        <p class="job__company text">{{ job().company }}</p>
+      </div>
+      <p class="job__location heading heading--sm">{{ job().location }}</p>
+    </a>
   `,
   styles: `
+    @use '../../../../public/scss/_media.scss' as *;
+
     :host {
-      padding: 4.9rem 3.2rem 3.2rem;
-      border-radius: 6px;
-      background-color: light-dark(var(--neutral-0), var(--primary-700));
-      display: flex;
-      flex-direction: column;
-      align-items: start;
-      gap: 4.4rem;
-      position: relative;
-      transition: background-color 0.35s ease-in-out;
+      display: contents;
 
       .job {
+        padding: 4.9rem 3.2rem 3.2rem;
+        border-radius: 6px;
+        background-color: light-dark(var(--neutral-0), var(--primary-700));
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        gap: 4.4rem;
+        position: relative;
+        text-decoration: none;
+        outline: 0 none;
+        transition:
+          background-color 0.35s ease-in-out,
+          box-shadow 0.35s ease-in-out;
+
+        @include respond(tablet) {
+          padding-right: 2.1rem;
+        }
+
+        @include respond(phone) {
+          padding-right: 9px;
+        }
+
+        &:hover,
+        &:focus {
+          .job__position {
+            color: light-dark(var(--neutral-300), var(--neutral-600));
+          }
+        }
+
         &__logo {
           position: absolute;
           top: 0;
@@ -70,10 +98,9 @@ import { RouterLink } from '@angular/router';
         }
 
         &__position {
-          line-height: 1;
+          transition: color 0.35s ease-in-out;
           color: light-dark(var(--primary-700), var(--neutral-0));
           margin: 1.3rem 0 1.7rem;
-          transition: color 0.35s ease-in-out;
         }
 
         &__company {

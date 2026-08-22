@@ -1,35 +1,38 @@
-import { HttpClient } from '@angular/common/http';
-import { computed, effect, inject, Injectable, signal } from '@angular/core';
+import { HttpClient, httpResource } from '@angular/common/http';
+import { computed, effect, inject, Service, signal } from '@angular/core';
 import { Job } from '../../shared/models/job';
 import { Subject, switchMap, tap } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Service()
 export class JobsStore {
   private http = inject(HttpClient);
 
   private state = signal<JobsState>(initialState);
+  private jobsResource = httpResource<Job[]>(() => 'data/data.json', { defaultValue: [] });
 
-  loading = computed(() => this.state().loading);
-  jobs = computed(() => this.state().jobs);
+  readonly loading = this.jobsResource.isLoading;
+  readonly jobs = this.jobsResource.asReadonly().value;
   filter = computed(() => this.state().filter);
 
   filteredJobs = computed(() =>
     this.jobs().filter((j) => {
       const { query, location, fullTimeOnly } = this.filter();
-      const jobContent = j.position
-        .concat(j.company)
-        .concat(j.description)
-        .concat(j.requirements.content)
-        .concat(j.requirements.items.join(' '));
+      const {
+        position,
+        company,
+        contract,
+        description,
+        requirements: { content, items },
+      } = j;
+      const jobContent = `${position}${company}${description}${content}${items.join(' ')}`;
+
       return (
         (!query || jobContent.toLowerCase().includes(query.toLowerCase())) &&
         (!location || j.location.toLowerCase().includes(location.toLowerCase())) &&
-        (!fullTimeOnly || j.contract === 'Full Time')
+        (!fullTimeOnly || contract === 'Full Time')
       );
-    })
+    }),
   );
 
   private loadJobs = new Subject<void>();
@@ -44,8 +47,8 @@ export class JobsStore {
         switchMap(() =>
           this.http
             .get<Job[]>('data/data.json')
-            .pipe(tap((jobs) => this.state.update((s) => ({ ...s, loading: false, jobs }))))
-        )
+            .pipe(tap((jobs) => this.state.update((s) => ({ ...s, loading: false, jobs })))),
+        ),
       )
       .subscribe();
 
@@ -58,8 +61,6 @@ export class JobsStore {
 }
 
 interface JobsState {
-  loading: boolean;
-  jobs: Job[];
   filter: IJobsFilters;
 }
 
@@ -70,8 +71,6 @@ export interface IJobsFilters {
 }
 
 const initialState: JobsState = {
-  loading: false,
-  jobs: [],
   filter: {
     query: '',
     location: '',
