@@ -1,0 +1,17 @@
+<a class="job" [routerLink]="[job().id]" [attr.aria-label]="job().position + ', ' + job().company">
+  <div class="job__logo" [style.background]="job().logoBackground">
+    <img [src]="job().logo" alt="" />
+  </div>
+  <div>
+    <div class="job__data">
+      <p class="text">{{ job().postedAt }}</p>
+      <div aria-hidden="true"></div>
+      <p class="text">{{ job().contract }}</p>
+    </div>
+    <h2 class="heading heading--md job__position">
+      {{ job().position }}
+    </h2>
+    <p class="job__company text">{{ job().company }}</p>
+  </div>
+  <p class="job__location heading heading--sm">{{ job().location }}</p>
+</a>

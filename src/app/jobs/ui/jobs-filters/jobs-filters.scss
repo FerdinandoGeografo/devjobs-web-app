@@ -1,0 +1,135 @@
+
+@use '../../../../../public/scss/_media.scss' as *;
+@use '@angular/material' as mat;
+
+:host {
+  position: sticky;
+
+  .filters {
+    border-radius: 6px;
+    background-color: light-dark(var(--neutral-0), var(--primary-700));
+    display: flex;
+    align-items: center;
+    height: 8rem;
+    overflow: hidden;
+    transition: background-color 0.35s ease-in-out;
+
+    &__query {
+      flex: 1;
+
+      &::ng-deep .mat-mdc-form-field-icon-prefix .mat-icon {
+        padding: 0 1.6rem 0 3.2rem;
+      }
+    }
+
+    &__location {
+      flex: 1;
+      max-width: 30rem;
+
+      &::ng-deep .mat-mdc-form-field-icon-prefix .mat-icon {
+        width: 1.7rem;
+        height: 2.4rem;
+        padding: 0 1.6rem 0 2.3rem;
+      }
+    }
+
+    &__end {
+      padding: 0 1.6rem 0 0;
+      align-self: stretch;
+      flex: 1;
+      max-width: 34.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2.6rem;
+
+      @include mat.button-overrides(
+        (
+          filled-horizontal-padding: 3.55rem,
+        )
+      );
+    }
+
+    &__checkbox {
+      align-self: stretch;
+      display: flex;
+      align-items: center;
+      padding: 0 0 0 3.2rem;
+    }
+
+    &__trigger {
+      &::ng-deep .mdc-icon-button__ripple::before {
+        transition: all 0.35s ease-in-out;
+      }
+
+      .mat-icon {
+        --size: 2rem;
+        width: var(--size);
+        height: var(--size);
+        font-size: var(--size);
+      }
+
+      @include mat.icon-button-overrides(
+        (
+          icon-size: 2rem,
+          touch-target-size: 4.8rem,
+          state-layer-size: 4.8rem,
+          container-shape: 5px,
+          state-layer-color: light-dark(var(--neutral-100), var(--primary-700)),
+          hover-state-layer-opacity: 1,
+          focus-state-layer-opacity: 1,
+        )
+      );
+    }
+
+    &__search-mobile {
+      background-color: var(--primary-400);
+
+      &::ng-deep .mdc-icon-button__ripple::before {
+        transition: all 0.35s ease-in-out;
+      }
+
+      @include mat.icon-button-overrides(
+        (
+          icon-size: 2.4rem,
+          touch-target-size: 4.8rem,
+          container-shape: 5px,
+          icon-color: var(--neutral-0),
+          state-layer-color: var(--primary-100),
+          state-layer-size: 4.8rem,
+          hover-state-layer-opacity: 1,
+          focus-state-layer-opacity: 1,
+        )
+      );
+    }
+
+    .btn {
+      @include mat.button-overrides(
+        (
+          filled-horizontal-padding: 3.55rem,
+        )
+      );
+    }
+
+    @include respond(tablet) {
+      .btn {
+        @include mat.button-overrides(
+          (
+            filled-horizontal-padding: 1.4rem,
+          )
+        );
+      }
+    }
+
+    @include respond(phone) {
+      gap: 1rem;
+      padding-right: 2.4rem;
+
+      &__query {
+        &::ng-deep .mdc-text-field {
+          padding: 0 0 0 2.4rem;
+        }
+      }
+    }
+  }
+}

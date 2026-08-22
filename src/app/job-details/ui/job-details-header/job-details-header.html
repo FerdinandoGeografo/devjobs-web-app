@@ -1,0 +1,14 @@
+<div class="job__logo" [style.background]="job().logoBackground">
+  <img [src]="job().logo" alt="{{ job().company }}'s logo image" />
+</div>
+<div class="job__content">
+  <div class="job__text">
+    <p class="heading heading--md">
+      {{ job().company }}
+    </p>
+    <p class="text">{{ companyUrl() }}</p>
+  </div>
+  <a class="btn btn--secondary" matButton="filled" [href]="job().website" target="__blank">
+    Company Site
+  </a>
+</div>

@@ -1,0 +1,32 @@
+@use '../../../../../public/scss/_media.scss' as *;
+
+:host {
+  display: flex;
+  flex-direction: column;
+  gap: 5.6rem;
+
+  .jobs {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+    column-gap: 3rem;
+    row-gap: 6.5rem;
+  }
+
+  .btn {
+    align-self: center;
+  }
+
+  @include respond(tablet) {
+    .jobs {
+      column-gap: 1.1rem;
+    }
+  }
+
+  @include respond(phone) {
+    gap: 3.2rem;
+
+    .jobs {
+      row-gap: 4.9rem;
+    }
+  }
+}

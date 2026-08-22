@@ -1,0 +1,24 @@
+<h2 mat-dialog-title class="sr-only">Extra filters</h2>
+<mat-dialog-content>
+  <form (submit)="onSubmit($event)" class="form">
+    <mat-form-field class="form__location">
+      <input
+        type="text"
+        matInput
+        placeholder="Filter by location..."
+        aria-label="Filter by location..."
+        [formField]="filtersForm.location"
+      />
+      <mat-icon matIconPrefix svgIcon="custom:location" />
+    </mat-form-field>
+    <mat-divider />
+
+    <mat-checkbox class="form__checkbox" [formField]="filtersForm.fullTimeOnly">
+      Full Time Only
+    </mat-checkbox>
+
+    <div class="form__submit">
+      <button class="btn btn--primary" matButton="filled" type="submit">Search</button>
+    </div>
+  </form>
+</mat-dialog-content>

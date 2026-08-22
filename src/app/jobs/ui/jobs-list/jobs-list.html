@@ -1,0 +1,9 @@
+<ul class="jobs">
+  @for (job of jobs(); track job.id) {
+    <li>
+      <app-jobs-list-item [job]="job" />
+    </li>
+  }
+</ul>
+
+<button class="btn btn--primary" matButton="filled">Load More</button>

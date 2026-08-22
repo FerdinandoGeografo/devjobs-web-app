@@ -1,51 +1,15 @@
 import { Component, inject, input, effect, booleanAttribute } from '@angular/core';
-import { JobsFilters } from './ui/jobs-filters';
-import { JobsList } from './ui/jobs-list';
-import { IJobsFilters, JobsStore } from './data-access/jobs-store';
 import { Router } from '@angular/router';
+
+import { IJobsFilters, JobsStore } from './data-access/jobs-store';
+import { JobsList } from './ui/jobs-list/jobs-list';
+import { JobsFilters } from './ui/jobs-filters/jobs-filters';
 
 @Component({
   selector: 'app-jobs',
   imports: [JobsFilters, JobsList],
-  template: `
-    <section class="jobs container container--lg">
-      <app-jobs-filters
-        [filter]="jobsStore.filter()"
-        (searchClicked)="
-          this.router.navigate(['/jobs'], {
-            queryParams: {
-              query: $event.query,
-              location: $event.location,
-              fullTimeOnly: $event.fullTimeOnly,
-            },
-          })
-        "
-      />
-
-      <app-jobs-list [jobs]="jobsStore.filteredJobs()" />
-    </section>
-  `,
-  styles: `
-    @use '../../../public/scss/_media.scss' as *;
-
-    :host {
-      .jobs {
-        display: flex;
-        flex-direction: column;
-        gap: 10.5rem;
-        padding-bottom: 6.4rem;
-
-        @include respond(tablet) {
-          gap: 7rem;
-          padding-bottom: 2rem;
-        }
-
-        @include respond(phone) {
-          gap: 5.7rem;
-        }
-      }
-    }
-  `,
+  templateUrl: `./jobs.html`,
+  styleUrl: './jobs.scss',
 })
 export class Jobs {
   protected readonly router = inject(Router);

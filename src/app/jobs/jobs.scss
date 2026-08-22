@@ -1,0 +1,20 @@
+
+@use '../../../public/scss/_media.scss' as *;
+
+:host {
+  .jobs {
+    display: flex;
+    flex-direction: column;
+    gap: 10.5rem;
+    padding-bottom: 6.4rem;
+
+    @include respond(tablet) {
+      gap: 7rem;
+      padding-bottom: 2rem;
+    }
+
+    @include respond(phone) {
+      gap: 5.7rem;
+    }
+  }
+}

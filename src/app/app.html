@@ -1,0 +1,8 @@
+<app-header>
+  <app-logo />
+  <app-theme-slide-toggle [darkTheme]="store.darkTheme()" (darkThemeChange)="store.toggleTheme()" />
+</app-header>
+
+<main class="main">
+  <router-outlet />
+</main>

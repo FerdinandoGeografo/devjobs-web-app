@@ -1,0 +1,51 @@
+<form (submit)="onSubmit($event)" class="filters">
+  <mat-form-field class="filters__query">
+    <input
+      aria-label="Filter by content..."
+      type="text"
+      matInput
+      [placeholder]="queryPlaceholder()"
+      [formField]="filtersForm.query"
+    />
+    @if (!brStore.isPhone()) {
+      <mat-icon aria-hidden="true" matIconPrefix svgIcon="custom:search" />
+    }
+  </mat-form-field>
+  @if (brStore.isTablet() || brStore.isDesktop()) {
+    <mat-divider vertical />
+
+    <mat-form-field class="filters__location">
+      <input
+        aria-label="Filter by location..."
+        type="text"
+        matInput
+        placeholder="Filter by location..."
+        [formField]="filtersForm.location"
+      />
+      <mat-icon aria-hidden="true" matIconPrefix svgIcon="custom:location" />
+    </mat-form-field>
+
+    <mat-divider vertical />
+
+    <div class="filters__end">
+      <mat-checkbox class="filters__checkbox" [formField]="filtersForm.fullTimeOnly">
+        {{ fullTimeLabel() }}
+      </mat-checkbox>
+
+      <button class="btn btn--primary" matButton="filled" type="submit">Search</button>
+    </div>
+  } @else {
+    <button
+      matIconButton
+      class="filters__trigger"
+      type="button"
+      aria-label="Open more jobs filters"
+      (click)="openMoreFilters()"
+    >
+      <mat-icon svgIcon="custom:filter" />
+    </button>
+    <button matIconButton class="filters__search-mobile" aria-label="Search jobs" type="submit">
+      <mat-icon svgIcon="custom:search" />
+    </button>
+  }
+</form>

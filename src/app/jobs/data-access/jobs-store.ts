@@ -35,24 +35,8 @@ export class JobsStore {
     }),
   );
 
-  private loadJobs = new Subject<void>();
-
   constructor() {
     effect(() => console.log('State Changed:\t', this.state()));
-
-    this.loadJobs
-      .pipe(
-        takeUntilDestroyed(),
-        tap(() => this.state.update((s) => ({ ...s, loading: true }))),
-        switchMap(() =>
-          this.http
-            .get<Job[]>('data/data.json')
-            .pipe(tap((jobs) => this.state.update((s) => ({ ...s, loading: false, jobs })))),
-        ),
-      )
-      .subscribe();
-
-    this.loadJobs.next();
   }
 
   setFilter(filter: IJobsFilters) {

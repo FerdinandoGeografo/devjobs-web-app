@@ -1,0 +1,15 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+  overflow: hidden;
+  background-color: light-dark(var(--neutral-100), var(--primary-900));
+  transition: background-color 0.35s ease-in-out;
+
+  .main {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    position: relative;
+  }
+}
