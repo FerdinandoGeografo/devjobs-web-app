@@ -1,4 +1,4 @@
-import { Component, input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { Job } from '../../shared/models/job';
 import { MatAnchor } from '@angular/material/button';
 import { JobDetailsList } from './job-details-list';
@@ -6,7 +6,6 @@ import { JobDetailsList } from './job-details-list';
 @Component({
   selector: 'app-job-details-content',
   imports: [MatAnchor, JobDetailsList],
-  changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     <article class="job">
       <div class="job__heading-box">
@@ -19,7 +18,7 @@ import { JobDetailsList } from './job-details-list';
           <h1 class="job__position heading heading--xl">{{ job().position }}</h1>
           <p class="job__location heading heading--sm">{{ job().location }}</p>
         </div>
-        <button matButton="filled">Apply Now</button>
+        <button class="btn btn--primary" matButton="filled">Apply Now</button>
       </div>
 
       <p class="text">
@@ -35,9 +34,9 @@ import { JobDetailsList } from './job-details-list';
     </article>
   `,
   styles: `
-    :host {
-      max-width: 73rem;
+    @use '../../../../public/scss/_media.scss' as *;
 
+    :host {
       .job {
         padding: 4.8rem 4.3rem 4.8rem 4.8rem;
         background-color: light-dark(var(--neutral-0), var(--primary-700));
@@ -94,6 +93,23 @@ import { JobDetailsList } from './job-details-list';
 
         &__location {
           color: var(--primary-400);
+        }
+      }
+
+      @include respond(phone) {
+        .job {
+          padding: 4rem 2.45rem;
+          gap: 3.2rem;
+
+          &__heading-box {
+            flex-direction: column;
+            align-items: stretch;
+            gap: 5rem;
+          }
+
+          &__position {
+            margin-bottom: 8px;
+          }
         }
       }
     }

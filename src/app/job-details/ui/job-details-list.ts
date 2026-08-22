@@ -1,10 +1,9 @@
-import { Component, input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { JobMetadata } from '../../shared/models/job';
 
 @Component({
   selector: 'app-job-details-list',
   imports: [],
-  changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     <p class="heading heading--md">{{ title() }}</p>
 
@@ -16,7 +15,7 @@ import { JobMetadata } from '../../shared/models/job';
             @if (bulletMode() === 'point') {
               <div class="list__point" aria-hidden="true"></div>
             } @else {
-              <span class="list__num text">{{ $index }}</span>
+              <span class="list__num text">{{ $index + 1 }}</span>
             }
             <p class="text">{{ item }}</p>
           </li>
@@ -25,6 +24,8 @@ import { JobMetadata } from '../../shared/models/job';
     </div>
   `,
   styles: `
+    @use '../../../../public/scss/_media.scss' as *;
+
     :host {
       display: flex;
       flex-direction: column;
@@ -69,6 +70,14 @@ import { JobMetadata } from '../../shared/models/job';
         &__num {
           color: var(--primary-400);
           font-weight: 700;
+        }
+      }
+
+      @include respond(phone) {
+        .list {
+          &__container {
+            gap: 3.2rem;
+          }
         }
       }
     }

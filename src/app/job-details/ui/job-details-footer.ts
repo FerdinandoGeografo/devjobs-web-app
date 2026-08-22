@@ -1,23 +1,25 @@
-import { Component, input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { Job } from '../../shared/models/job';
 
 @Component({
   selector: 'app-job-details-footer',
   imports: [MatButtonModule],
-  changeDetection: ChangeDetectionStrategy.Eager,
   template: `
-    <div class="footer__content">
+    <footer class="footer__content">
       <div class="footer__text">
         <h2 class="heading heading--md">{{ position() }}</h2>
         <p class="text">{{ company() }}</p>
       </div>
-      <button matButton="filled">Apply Now</button>
-    </div>
+      <button class="btn btn--primary" matButton="filled">Apply Now</button>
+    </footer>
   `,
   styles: `
+    @use '../../../../public/scss/_media.scss' as *;
+
     :host {
-      margin-top: 4.8rem;
+      position: fixed;
+      inset: auto 0 0 0;
       align-self: stretch;
       display: flex;
       align-items: center;
@@ -28,8 +30,9 @@ import { Job } from '../../shared/models/job';
 
       .footer {
         &__content {
-          min-width: 73rem;
-          padding: 2.3rem 0 2.2rem;
+          max-width: 80rem;
+          width: 100%;
+          padding: 2.3rem 3.5rem 2.2rem;
           display: flex;
           align-items: center;
           justify-content: space-between;
@@ -52,6 +55,24 @@ import { Job } from '../../shared/models/job';
 
           .text {
             color: var(--neutral-600);
+          }
+        }
+
+        @include respond(tablet) {
+          padding-inline: 3.95rem;
+        }
+
+        @include respond(phone) {
+          padding: 2.5rem 2.4rem 2.3rem;
+
+          &__content {
+            & > * {
+              flex: 1;
+            }
+          }
+
+          &__text {
+            display: none;
           }
         }
       }
