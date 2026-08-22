@@ -1,0 +1,58 @@
+@use '@angular/material' as mat;
+
+.btn {
+  transition: all .35s ease-in-out;
+
+  .mdc-button__label {
+    transition: color .35s ease-in-out;
+  }
+
+  .mdc-button__ripple::before {
+    transition: all .35s ease-in-out;
+  }
+
+  &:not(:disabled):focus {
+    box-shadow: 0 0 0 2px light-dark(var(--neutral-0), var(--primary-900)), 0 0 0 4px light-dark(var(--primary-400), var(--neutral-300));
+  }
+
+  @include mat.button-overrides((
+    filled-container-shape: 5px,
+    filled-icon-offset: 0,
+    filled-icon-spacing: 8px,
+    filled-label-text-size: 1.6rem,
+    filled-label-text-tracking: 0,
+    filled-label-text-weight: 700,
+    filled-container-height: 4.8rem,
+    filled-touch-target-size: 4.8rem,
+    filled-ripple-color: transparent,
+  ));
+
+  &--primary {
+    @include mat.button-overrides((
+      filled-horizontal-padding: 3.95rem,
+      filled-container-color: var(--primary-400),
+      filled-disabled-container-color: var(--neutral-100),
+      filled-disabled-label-text-color: var(--neutral-300),
+      filled-disabled-state-layer-color: transparent,
+      filled-focus-state-layer-opacity: 1,
+      filled-hover-state-layer-opacity: 1,
+      filled-pressed-state-layer-opacity: 0,
+      filled-label-text-color: var(--neutral-0),
+      filled-state-layer-color: var(--primary-100),
+    ));
+  }
+
+  &--secondary {
+    @include mat.button-overrides((
+      filled-horizontal-padding: 4.05rem,
+      filled-container-color: light-dark(rgba(89, 100, 224, 10%), rgba(201, 201, 201, .1)),
+      filled-disabled-label-text-color: transparent,
+      filled-disabled-state-layer-color: transparent,
+      filled-focus-state-layer-opacity: 1,
+      filled-hover-state-layer-opacity: 1,
+      filled-label-text-color: light-dark(var(--primary-400), var(--neutral-0)),
+      filled-pressed-state-layer-opacity: 1,
+      filled-state-layer-color: light-dark(rgba(89, 100, 224, .35), rgba(201, 201, 201, .75)),
+    ));
+  }
+}

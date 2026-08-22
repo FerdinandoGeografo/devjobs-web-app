@@ -1,0 +1,42 @@
+@use '@angular/material' as mat;
+
+html {
+  @include mat.form-field-overrides((
+    filled-container-shape: 0,
+    filled-container-color: light-dark(var(--neutral-0), var(--primary-700)),
+    filled-active-indicator-height: 0,
+    filled-focus-active-indicator-height: 0,
+    filled-input-text-color: light-dark(var(--primary-700), var(--neutral-0)),
+    filled-input-text-placeholder-color: light-dark(rgba(25, 32, 45, 0.5), rgba(255, 255, 255, .5)),
+    filled-caret-color: var(--primary-400),
+    container-text-line-height: 1.9rem,
+    container-text-size: 1.6rem,
+    container-text-tracking: 0,
+    container-text-weight: 400,
+    container-height: 8rem,
+  ));
+
+  .mdc-text-field--no-label:not(.mdc-text-field--textarea) .mat-mdc-form-field-input-control.mdc-text-field__input {
+    height: 2rem;
+    transition: color .35s ease-in-out;
+
+    &::placeholder {
+      transition: color .35s;
+    }
+  }
+
+  .mdc-text-field--no-label {
+    transition: background-color .35s ease-in-out;
+
+    .mat-mdc-form-field-infix {
+      padding-top: 2.8rem;
+      padding-bottom: 3.2rem;
+    }
+  }
+
+  .mat-mdc-form-field-icon-prefix {
+    padding: 0;
+  }
+}
+
+

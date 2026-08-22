@@ -1,3 +1,5 @@
+@use './media' as *;
+
 body {
   font-family: "Kumbh Sans", sans-serif;
 }
@@ -8,6 +10,11 @@ body {
     line-height: 3.4rem;
     letter-spacing: 0;
     font-weight: 700;
+
+    @include respond(phone) {
+      font-size: 2rem;
+      line-height: 1;
+    }
   }
 
   &--lg {
@@ -29,6 +36,10 @@ body {
     line-height: 1.8rem;
     letter-spacing: 0;
     font-weight: 700;
+
+    @include respond(phone) {
+      line-height: 1;
+    }
   }
 }
 

@@ -1,8 +1,6 @@
-import { computed, DOCUMENT, effect, inject, Injectable, signal } from '@angular/core';
+import { computed, DOCUMENT, effect, inject, Service, signal } from '@angular/core';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Service()
 export class GlobalStore {
   private document = inject(DOCUMENT);
   private darkClass = 'dark' as const;
@@ -29,5 +27,5 @@ export interface GlobalState {
 }
 
 const initialState: GlobalState = {
-  darkTheme: true,
+  darkTheme: false,
 };

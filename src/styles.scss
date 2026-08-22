@@ -1,7 +1,13 @@
+@use "../public/scss/fonts";
+@use "../public/scss/media";
 @use "../public/scss/variables";
 @use "../public/scss/base";
-@use "../public/scss/media";
 @use "../public/scss/typography";
+
+@use '../public/scss/components/button';
+@use '../public/scss/components/checkbox';
+@use '../public/scss/components/form-field';
+@use '../public/scss/components/slide-toggle';
 
 @use '@angular/material' as mat;
 
@@ -15,45 +21,6 @@ html {
     density: 0,
   ));
 
-  /***** BUTTON *****/
-  @include mat.button-overrides((
-    filled-container-shape: 5px,
-    filled-horizontal-padding: 3.95rem,
-    filled-icon-offset: 0,
-    filled-icon-spacing: 8px,
-    filled-touch-target-size: 4.8rem,
-    filled-container-color: var(--primary-400),
-    filled-disabled-container-color: var(--neutral-100),
-    filled-disabled-label-text-color: var(--neutral-300),
-    filled-disabled-state-layer-color: rgba(255, 255, 255, 1),
-    filled-focus-state-layer-opacity: 1,
-    filled-hover-state-layer-opacity: 1,
-    filled-label-text-color: var(--neutral-0),
-    filled-pressed-state-layer-opacity: 0,
-    filled-ripple-color: transparent,
-    filled-state-layer-color: var(--primary-100),
-    filled-label-text-size: 1.6rem,
-    filled-label-text-tracking: 0,
-    filled-label-text-weight: 700,
-    filled-container-height: 4.8rem,
-    tonal-container-shape: 5px,
-    tonal-container-color: rgba(89, 100, 224, 10%),
-    tonal-horizontal-padding: 4.05rem,
-    tonal-touch-target-size: 4.8rem,
-    tonal-disabled-label-text-color: transparent,
-    tonal-disabled-state-layer-color: transparent,
-    tonal-focus-state-layer-opacity: .35,
-    tonal-hover-state-layer-opacity: .35,
-    tonal-label-text-color: var(--primary-400),
-    tonal-pressed-state-layer-opacity: .35,
-    tonal-ripple-color: transparent,
-    tonal-state-layer-color: var(--primary-400),
-    tonal-label-text-size: 1.6rem,
-    tonal-label-text-tracking: 0,
-    tonal-label-text-weight: 700,
-    tonal-container-height: 4.8rem,
-  ));
-
   /***** DIVIDER *****/
   @include mat.divider-overrides((
     color: rgba(110, 128, 152, .2),
@@ -62,162 +29,6 @@ html {
   .mat-divider.mat-divider-vertical {
     height: 100%;
   }
-
-  /***** SLIDE TOGGLE *****/
-  @include mat.slide-toggle-overrides(());
-
-  /***** FORM-FIELD *****/
-  @include mat.form-field-overrides((
-    filled-container-shape: 0,
-    filled-container-color: light-dark(var(--neutral-0), var(--primary-700)),
-    filled-active-indicator-height: 0,
-    filled-focus-active-indicator-height: 0,
-    filled-input-text-color: light-dark(var(--primary-700), var(--neutral-0)),
-    filled-input-text-placeholder-color: light-dark(rgba(25, 32, 45, 0.5), rgba(255, 255, 255, .5)),
-    filled-caret-color: var(--primary-400),
-    container-text-line-height: 1.9rem,
-    container-text-size: 1.6rem,
-    container-text-tracking: 0,
-    container-text-weight: 400,
-    container-height: 8rem,
-  ));
-
-  .mdc-text-field--no-label:not(.mdc-text-field--textarea) .mat-mdc-form-field-input-control.mdc-text-field__input {
-    height: 2rem;
-    transition: color .35s ease-in-out;
-
-    &::placeholder {
-      transition: color .35s;
-    }
-  }
-
-  .mdc-text-field--no-label {
-    transition: background-color .35s ease-in-out;
-
-    .mat-mdc-form-field-infix {
-      padding-top: 2.8rem;
-      padding-bottom: 3.2rem;
-    }
-  }
-
-  .mat-mdc-form-field-icon-prefix {
-    padding: 0;
-  }
-
-  /***** CHECKBOX *****/
-  @include mat.checkbox-overrides((
-    selected-focus-state-layer-opacity: 0,
-    selected-hover-state-layer-opacity: 0,
-    selected-pressed-state-layer-opacity: 0,
-    selected-checkmark-color: var(--neutral-0),
-    selected-focus-icon-color: var(--primary-400),
-    selected-hover-icon-color: var(--primary-400),
-    selected-icon-color: var(--primary-400),
-    selected-pressed-icon-color: var(--primary-400),
-    unselected-focus-state-layer-opacity: .25,
-    unselected-hover-state-layer-opacity: .25,
-    unselected-pressed-state-layer-opacity: .25,
-    unselected-focus-state-layer-color: var(--primary-400),
-    unselected-pressed-state-layer-color: var(--primary-400),
-    unselected-hover-state-layer-color: var(--primary-400),
-    unselected-focus-icon-color: transparent,
-    unselected-hover-icon-color: transparent,
-    unselected-icon-color: light-dark(rgba(25, 32, 45, 0.135), rgba(255, 255, 255, 0.135)),
-    label-text-color: light-dark(var(--primary-700), var(--neutral-0)),
-    label-text-size: 1.6rem,
-    label-text-line-height: 1.6rem,
-    label-text-tracking: -.1px,
-    label-text-weight: 700,
-    touch-target-size: 2.4rem,
-    touch-target-display: block,
-    state-layer-size: 2.4rem,
-  ));
-
-  .mdc-checkbox__background {
-    height: var(--mat-checkbox-state-layer-size);
-    width: var(--mat-checkbox-state-layer-size);
-    border-width: 0;
-    border-radius: 3px;
-    top: 0;
-    left: 0;
-    background-color: var(--mat-checkbox-unselected-icon-color);
-    transition-duration: .35s;
-  }
-
-  .mdc-checkbox__checkmark {
-    --size: 1.4rem;
-    width: var(--size);
-    height: var(--size);
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-
-  .mat-mdc-checkbox label {
-    padding-top: 3px;
-    padding-left: 1.6rem;
-    transition: color .35s ease-in-out;
-  }
-
-  .mat-internal-form-field {
-    align-items: start;
-  }
-
-  .mat-mdc-checkbox .mat-mdc-checkbox-ripple, .mdc-checkbox__ripple {
-    border-radius: 3px;
-  }
-
-  /***** SLIDE TOGGLE *****/
-  @include mat.slide-toggle-overrides((
-    track-width: 4.8rem,
-    track-height: 2.4rem,
-    track-outline-width: 0,
-    track-shape: var(--mat-sys-corner-full),
-    touch-target-size: 1.4rem,
-    pressed-handle-size: 1.4rem,
-    selected-handle-horizontal-margin: 0 0 0 -5px,
-    selected-pressed-handle-horizontal-margin: 0 0 0 -5px,
-    selected-track-outline-color: transparent,
-    selected-track-outline-width: 0px,
-    state-layer-size: 1.4rem,
-    selected-handle-size: 1.4rem,
-    unselected-handle-horizontal-margin: 0 0 0 5px,
-    unselected-pressed-handle-horizontal-margin: 0 0 0 5px,
-    unselected-handle-size: 1.4rem,
-    handle-width: 1.4rem,
-    handle-height: 1.4rem,
-    handle-surface-color: var(--neutral-0),
-    handle-shape: 50%,
-    track-outline-color: transparent,
-    selected-focus-handle-color: var(--primary-100),
-    selected-hover-handle-color: var(--primary-100),
-    selected-focus-state-layer-color: var(--primary-100),
-    selected-focus-state-layer-opacity: 1,
-    selected-hover-track-color: var(--neutral-0),
-    selected-focus-track-color: var(--neutral-0),
-    selected-handle-color: var(--primary-400),
-    selected-hover-state-layer-color: var(--primary-100),
-    selected-hover-state-layer-opacity: 1,
-    selected-pressed-handle-color: var(--primary-400),
-    selected-pressed-state-layer-color: var(--primary-100),
-    selected-pressed-state-layer-opacity: 1,
-    selected-pressed-track-color: var(--neutral-0),
-    selected-track-color: var(--neutral-0),
-    unselected-focus-handle-color: var(--primary-100),
-    unselected-focus-state-layer-color: var(--primary-100),
-    unselected-focus-state-layer-opacity: 1,
-    unselected-focus-track-color: var(--neutral-0),
-    unselected-handle-color: var(--primary-400),
-    unselected-hover-handle-color: var(--primary-100),
-    unselected-hover-state-layer-color: var(--primary-100),
-    unselected-hover-state-layer-opacity: 1,
-    unselected-hover-track-color: var(--neutral-0),
-    unselected-pressed-handle-color: var(--primary-400),
-    unselected-pressed-state-layer-color: var(--primary-100),
-    unselected-pressed-state-layer-opacity: 1,
-    unselected-pressed-track-color: var(--neutral-0),
-    unselected-track-color: var(--neutral-0),
-  ));
 }
 
 body {
