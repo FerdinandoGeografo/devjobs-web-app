@@ -1,65 +1,79 @@
-import { Component, input, output, ChangeDetectionStrategy } from '@angular/core';
-import { MatIconModule } from '@angular/material/icon';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-header',
-  imports: [MatIconModule, MatSlideToggleModule],
-  changeDetection: ChangeDetectionStrategy.Eager,
+  imports: [],
   template: `
     <header class="header">
-      <div class="header__container">
-        <img src="images/desktop/logo.svg" alt="Devjobs app logo image" />
-        <div class="header__slider-box">
-          <mat-icon svgIcon="custom:sun" />
-          <mat-slide-toggle
-            disableRipple
-            hideIcon
-            [checked]="darkTheme()"
-            (change)="themeToggled.emit()"
-          />
-          <mat-icon svgIcon="custom:moon" />
-        </div>
+      <picture class="header__background">
+        <source media="(max-width: 40em)" srcset="/images/mobile/bg-pattern-header.svg" />
+
+        <source media="(max-width: 64em)" srcset="/images/tablet/bg-pattern-header.svg" />
+
+        <img src="/images/desktop/bg-pattern-header.svg" alt="" />
+      </picture>
+      <div class="header__container container container--lg">
+        <ng-content />
       </div>
     </header>
   `,
   styles: `
+    @use '../../../../public/scss/_media.scss' as *;
+
     :host {
       .header {
-        background-image: url('/images/desktop/bg-pattern-header.svg');
-        background-size: 100% 100%;
-        background-repeat: no-repeat;
-        background-position: top center;
+        position: relative;
+        isolation: isolate;
+
+        &__background {
+          position: absolute;
+          inset: 0 0 auto;
+          width: 100%;
+          height: 16.2rem;
+          z-index: -1;
+
+          img {
+            width: 100%;
+            height: 100%;
+          }
+        }
 
         &__container {
-          padding: 4.5rem 16.5rem 8.5rem;
+          padding-top: 4.5rem;
+          padding-bottom: 8.5rem;
           display: flex;
-          align-items: center;
+          align-items: start;
           justify-content: space-between;
         }
 
-        &__slider-box {
-          display: flex;
-          align-items: center;
-          gap: 1.6rem;
+        @include respond(tablet) {
+          &__background {
+            height: 16rem;
 
-          .mat-icon {
-            &[svgIcon='custom:sun'] {
-              width: 2rem;
-              height: 1.86rem;
+            img {
+              object-fit: cover;
             }
-            &[svgIcon='custom:moon'] {
-              width: 1.2rem;
-              height: 1.2rem;
-              font-size: 1.2rem;
-            }
+          }
+
+          &__container {
+            padding-top: 4.2rem;
+            padding-bottom: 8.6rem;
+            align-items: center;
+          }
+        }
+
+        @include respond(phone) {
+          &__background {
+            height: 13.6rem;
+          }
+
+          &__container {
+            padding-top: 3.2rem;
+            padding-bottom: 7.2rem;
           }
         }
       }
     }
   `,
 })
-export class Header {
-  darkTheme = input.required<boolean>();
-  themeToggled = output<void>();
-}
+export class Header {}

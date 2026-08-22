@@ -1,16 +1,23 @@
-import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Header } from './shared/ui/header';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { GlobalStore } from './shared/data-access/global-store';
+import { Logo } from './shared/ui/logo';
+import { ThemeSlideToggle } from './shared/ui/theme-slide-toggle';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Header],
-  changeDetection: ChangeDetectionStrategy.Eager,
+  imports: [RouterOutlet, Header, Logo, ThemeSlideToggle],
   template: `
-    <app-header [darkTheme]="store.darkTheme()" (themeToggled)="store.toggleTheme()" />
+    <app-header>
+      <app-logo />
+      <app-theme-slide-toggle
+        [darkTheme]="store.darkTheme()"
+        (darkThemeChange)="store.toggleTheme()"
+      />
+    </app-header>
 
     <main class="main">
       <router-outlet />
@@ -19,12 +26,13 @@ import { GlobalStore } from './shared/data-access/global-store';
   styles: `
     :host {
       min-height: 100vh;
-      display: block;
+      display: flex;
+      flex-direction: column;
       background-color: light-dark(var(--neutral-100), var(--primary-900));
       transition: background-color 0.35s ease-in-out;
 
       .main {
-        transform: translateY(-4.1rem);
+        flex: 1;
       }
     }
   `,
