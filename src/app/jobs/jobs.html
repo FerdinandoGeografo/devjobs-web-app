@@ -1,13 +1,5 @@
 <section class="jobs container container--lg">
-  <app-jobs-filters
-    [filter]="jobsStore.filter()"
-    (searchClicked)="
-      this.router.navigate(['/jobs'], {
-        queryParams: $event,
-        queryParamsHandling: 'merge',
-      })
-    "
-  />
+  <app-jobs-filters [filter]="jobsStore.filter()" (searchClicked)="onSearch($event)" />
 
   <app-jobs-list
     [jobs]="jobsStore.visibleJobs()"

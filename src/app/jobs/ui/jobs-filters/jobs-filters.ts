@@ -30,11 +30,10 @@ import { JobsFiltersDialog } from '../jobs-filters-dialog/jobs-filters-dialog';
 })
 export class JobsFilters {
   private dialog = inject(MatDialog);
+  protected readonly brStore = inject(BreakpointsStore);
 
   private dialogRef = signal<MatDialogRef<JobsFiltersDialog, IJobsFilters> | null>(null);
-  protected readonly brStore = inject(BreakpointsStore);
   readonly filter = model.required<IJobsFilters>();
-
   readonly searchClicked = output<IJobsFilters>();
 
   protected readonly filtersForm = form(this.filter);

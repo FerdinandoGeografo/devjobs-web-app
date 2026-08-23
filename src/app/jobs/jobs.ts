@@ -5,6 +5,11 @@ import { IJobsFilters, JOBS_PAGE_SIZE, JobsStore } from './data-access/jobs-stor
 import { JobsList } from './ui/jobs-list/jobs-list';
 import { JobsFilters } from './ui/jobs-filters/jobs-filters';
 
+function transformLimit(value: string | number | undefined): number {
+  const limit = numberAttribute(value);
+  return Number.isInteger(limit) && limit > 0 ? limit : JOBS_PAGE_SIZE;
+}
+
 @Component({
   selector: 'app-jobs',
   imports: [JobsFilters, JobsList],
@@ -20,31 +25,33 @@ export class Jobs {
   readonly fullTimeOnly = input(false, {
     transform: booleanAttribute,
   });
-  readonly limit = input(JOBS_PAGE_SIZE, { transform: numberAttribute });
+  readonly limit = input(JOBS_PAGE_SIZE, { transform: transformLimit });
 
   constructor() {
     effect(() => {
-      const filter: IJobsFilters = {
+      this.jobsStore.setFilter({
         query: this.query() ?? '',
         location: this.location() ?? '',
         fullTimeOnly: this.fullTimeOnly(),
-      };
-
-      this.jobsStore.setFilter(filter);
+      });
     });
 
     effect(() => {
-      const limit = this.limit();
-      if (Number.isNaN(limit))
-        this.router.navigate(['/jobs'], {
-          queryParams: { limit: JOBS_PAGE_SIZE },
-          queryParamsHandling: 'merge',
-        });
-      this.jobsStore.setLimit(limit);
+      this.jobsStore.setLimit(this.limit());
     });
   }
 
-  onLoadMore() {
+  protected onSearch(filter: IJobsFilters) {
+    this.router.navigate(['/jobs'], {
+      queryParams: {
+        ...filter,
+        limit: JOBS_PAGE_SIZE,
+      },
+      queryParamsHandling: 'merge',
+    });
+  }
+
+  protected onLoadMore() {
     const nextLimit = Math.min(this.limit() + JOBS_PAGE_SIZE, this.jobsStore.filteredJobs().length);
     this.router.navigate(['/jobs'], {
       queryParams: { limit: nextLimit },

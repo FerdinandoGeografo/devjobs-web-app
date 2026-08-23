@@ -1,8 +1,10 @@
 @let job = detailsStore.job();
 
 <section class="job container container--md">
-  @if (job === null) {
-    <p>No job found with id: {{ id() }}</p>
+  @if (detailsStore.loading()) {
+    <p class="heading heading--md">Loading...</p>
+  } @else if (detailsStore.notFound()) {
+    <app-empty-box emptyMessage="No job found. Please retry..." />
   } @else {
     <app-job-details-header [job]="job!" />
     <app-job-details-content [job]="job!" />

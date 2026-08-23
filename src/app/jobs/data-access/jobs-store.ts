@@ -2,17 +2,16 @@ import { httpResource } from '@angular/common/http';
 import { computed, Service, signal } from '@angular/core';
 import { Job } from '../../shared/models/job';
 
-export const JOBS_PAGE_SIZE = 12;
-
 @Service()
 export class JobsStore {
-  private state = signal<JobsState>(initialState);
   private jobsResource = httpResource<Job[]>(() => 'data/data.json', { defaultValue: [] });
+  readonly #filter = signal<IJobsFilters>(initialFilter);
+  readonly #limit = signal(JOBS_PAGE_SIZE);
 
   readonly loading = this.jobsResource.isLoading;
   readonly jobs = this.jobsResource.asReadonly().value;
-  filter = computed(() => this.state().filter);
-  limit = computed(() => this.state().limit);
+  readonly filter = this.#filter.asReadonly();
+  readonly limit = this.#limit.asReadonly();
 
   filteredJobs = computed(() =>
     this.jobs().filter((j) => {
@@ -33,22 +32,16 @@ export class JobsStore {
       );
     }),
   );
-
   visibleJobs = computed(() => this.filteredJobs().slice(0, this.limit()));
   hasMore = computed(() => this.filteredJobs().length > this.limit());
 
   setFilter(filter: IJobsFilters) {
-    this.state.update((s) => ({ ...s, filter }));
+    this.#filter.set(filter);
   }
 
   setLimit(limit: number) {
-    this.state.update((s) => ({ ...s, limit }));
+    this.#limit.set(limit);
   }
-}
-
-interface JobsState {
-  filter: IJobsFilters;
-  limit: number;
 }
 
 export interface IJobsFilters {
@@ -57,11 +50,10 @@ export interface IJobsFilters {
   fullTimeOnly: boolean;
 }
 
-const initialState: JobsState = {
-  filter: {
-    query: '',
-    location: '',
-    fullTimeOnly: false,
-  },
-  limit: JOBS_PAGE_SIZE,
+export const JOBS_PAGE_SIZE = 12;
+
+const initialFilter: IJobsFilters = {
+  query: '',
+  location: '',
+  fullTimeOnly: false,
 };

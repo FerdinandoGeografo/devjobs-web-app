@@ -1,5 +1,5 @@
 import { Component, input } from '@angular/core';
-import { JobMetadata } from '../../../shared/models/job';
+import { JobSection } from '../../../shared/models/job';
 
 @Component({
   selector: 'app-job-details-list',
@@ -9,6 +9,6 @@ import { JobMetadata } from '../../../shared/models/job';
 })
 export class JobDetailsList {
   title = input.required<string>();
-  jobMetadata = input.required<JobMetadata>();
+  jobSection = input.required<JobSection>();
   bulletMode = input<'point' | 'numeric'>('point');
 }

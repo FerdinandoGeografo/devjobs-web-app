@@ -1,6 +1,6 @@
 <header class="job">
   <div class="job__logo" [style.background]="job().logoBackground">
-    <img [src]="job().logo" alt="{{ job().company }}'s logo image" />
+    <img [src]="job().logo" alt="{{ job().company }} logo" />
   </div>
   <div class="job__content">
     <div class="job__text">
@@ -13,7 +13,8 @@
       class="btn btn--secondary"
       matButton="filled"
       [href]="job().website"
-      target="__blank"
+      target="_blank"
+      rel="noopener noreferrer"
       aria-label="Visit company website"
     >
       Company Site

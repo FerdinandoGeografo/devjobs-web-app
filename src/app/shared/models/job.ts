@@ -10,11 +10,11 @@ export interface Job {
   website: string;
   apply: string;
   description: string;
-  requirements: JobMetadata;
-  role: JobMetadata;
+  requirements: JobSection;
+  role: JobSection;
 }
 
-export interface JobMetadata {
+export interface JobSection {
   content: string;
   items: string[];
 }
