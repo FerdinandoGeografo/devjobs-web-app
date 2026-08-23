@@ -1,0 +1,11 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+
+  .heading--md {
+    color: light-dark(var(--neutral-900), var(--neutral-0));
+    transition: color .35s ease-in-out;
+  }
+}

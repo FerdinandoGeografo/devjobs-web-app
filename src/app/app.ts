@@ -17,13 +17,13 @@ import { Footer } from './shared/ui/footer/footer';
 })
 export class App {
   private matIconRegistry = inject(MatIconRegistry);
-  private domSanitizer = inject(DomSanitizer);
+  private sanitizer = inject(DomSanitizer);
   protected store = inject(ThemeStore);
 
   constructor() {
     this.matIconRegistry.addSvgIconSetInNamespace(
       'custom',
-      this.domSanitizer.bypassSecurityTrustResourceUrl('icons/icons.svg'),
+      this.sanitizer.bypassSecurityTrustResourceUrl('icons/icons.svg'),
     );
   }
 }
