@@ -1,11 +1,11 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { computed, effect, inject, Service } from '@angular/core';
+import { computed, inject, Service } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 
 export const BREAKPOINTS_QUERY = {
-  phone: '(max-width: 640px)',
-  tablet: '(min-width: 641px) and (max-width: 1024px)',
-  desktop: '(min-width: 1025px)',
+  phone: '(max-width: 736px)',
+  tablet: '(min-width: 737px) and (max-width: 1240px)',
+  desktop: '(min-width: 1241px)',
 } as const;
 
 export type Breakpoint = keyof typeof BREAKPOINTS_QUERY;
@@ -28,8 +28,4 @@ export class BreakpointsStore {
   readonly isPhone = computed(() => this.breakpoint() === 'phone');
   readonly isTablet = computed(() => this.breakpoint() === 'tablet');
   readonly isDesktop = computed(() => this.breakpoint() === 'desktop');
-
-  constructor() {
-    effect(() => console.log(this.breakpoint()));
-  }
 }

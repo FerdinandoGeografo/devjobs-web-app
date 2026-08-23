@@ -1,19 +1,18 @@
-import { HttpClient, httpResource } from '@angular/common/http';
-import { computed, effect, inject, Service, signal } from '@angular/core';
+import { httpResource } from '@angular/common/http';
+import { computed, Service, signal } from '@angular/core';
 import { Job } from '../../shared/models/job';
-import { Subject, switchMap, tap } from 'rxjs';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+
+export const JOBS_PAGE_SIZE = 12;
 
 @Service()
 export class JobsStore {
-  private http = inject(HttpClient);
-
   private state = signal<JobsState>(initialState);
   private jobsResource = httpResource<Job[]>(() => 'data/data.json', { defaultValue: [] });
 
   readonly loading = this.jobsResource.isLoading;
   readonly jobs = this.jobsResource.asReadonly().value;
   filter = computed(() => this.state().filter);
+  limit = computed(() => this.state().limit);
 
   filteredJobs = computed(() =>
     this.jobs().filter((j) => {
@@ -35,17 +34,21 @@ export class JobsStore {
     }),
   );
 
-  constructor() {
-    effect(() => console.log('State Changed:\t', this.state()));
-  }
+  visibleJobs = computed(() => this.filteredJobs().slice(0, this.limit()));
+  hasMore = computed(() => this.filteredJobs().length > this.limit());
 
   setFilter(filter: IJobsFilters) {
     this.state.update((s) => ({ ...s, filter }));
+  }
+
+  setLimit(limit: number) {
+    this.state.update((s) => ({ ...s, limit }));
   }
 }
 
 interface JobsState {
   filter: IJobsFilters;
+  limit: number;
 }
 
 export interface IJobsFilters {
@@ -60,4 +63,5 @@ const initialState: JobsState = {
     location: '',
     fullTimeOnly: false,
   },
+  limit: JOBS_PAGE_SIZE,
 };

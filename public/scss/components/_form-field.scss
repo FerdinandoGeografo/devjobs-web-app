@@ -1,3 +1,4 @@
+@use '../media' as *;
 @use '@angular/material' as mat;
 
 html {
@@ -37,6 +38,24 @@ html {
 
   .mat-mdc-form-field-icon-prefix {
     padding: 0;
+  }
+
+  @include respond(phone) {
+    @include mat.form-field-overrides((
+      container-text-line-height: 1.6rem,
+      container-height: 7.2rem,
+    ));
+
+    .mdc-text-field--no-label:not(.mdc-text-field--textarea) .mat-mdc-form-field-input-control.mdc-text-field__input {
+      height: 1.6rem;
+    }
+
+    .mdc-text-field--no-label {
+      .mat-mdc-form-field-infix {
+        padding-top: 2.7rem;
+        padding-bottom: 2.9rem;
+      }
+    }
   }
 }
 

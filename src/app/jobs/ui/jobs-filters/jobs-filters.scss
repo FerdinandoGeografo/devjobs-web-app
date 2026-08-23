@@ -4,28 +4,27 @@
 
 :host {
   position: sticky;
+  top: 0;
+  z-index: 1;
+  display: block;
+  border-radius: 6px;
 
   .filters {
     border-radius: 6px;
-    background-color: light-dark(var(--neutral-0), var(--primary-700));
-    display: flex;
-    align-items: center;
-    height: 8rem;
     overflow: hidden;
+    background-color: light-dark(var(--neutral-0), var(--primary-700));
+    height: 8rem;
+    display: grid;
+    grid-template-columns: minmax(19rem, 1fr) auto minmax(2rem, 30rem) auto minmax(6.5rem, 34.5rem);
     transition: background-color 0.35s ease-in-out;
 
     &__query {
-      flex: 1;
-
       &::ng-deep .mat-mdc-form-field-icon-prefix .mat-icon {
         padding: 0 1.6rem 0 3.2rem;
       }
     }
 
     &__location {
-      flex: 1;
-      max-width: 30rem;
-
       &::ng-deep .mat-mdc-form-field-icon-prefix .mat-icon {
         width: 1.7rem;
         height: 2.4rem;
@@ -35,9 +34,6 @@
 
     &__end {
       padding: 0 1.6rem 0 0;
-      align-self: stretch;
-      flex: 1;
-      max-width: 34.5rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -51,13 +47,14 @@
     }
 
     &__checkbox {
-      align-self: stretch;
       display: flex;
       align-items: center;
       padding: 0 0 0 3.2rem;
     }
 
     &__trigger {
+      align-self: center;
+
       &::ng-deep .mdc-icon-button__ripple::before {
         transition: all 0.35s ease-in-out;
       }
@@ -83,6 +80,7 @@
     }
 
     &__search-mobile {
+      align-self: center;
       background-color: var(--primary-400);
 
       &::ng-deep .mdc-icon-button__ripple::before {
@@ -112,6 +110,26 @@
     }
 
     @include respond(tablet) {
+      &__query {
+        &::ng-deep .mat-mdc-form-field-icon-prefix .mat-icon {
+          padding: 0 1.6rem 0 2.4rem;
+        }
+      }
+
+      &__location {
+        &::ng-deep .mat-mdc-form-field-icon-prefix .mat-icon {
+          padding: 0 1.6rem 0 2.4rem;
+        }
+      }
+
+      &__end {
+        gap: 2.8rem;
+      }
+
+      &__checkbox {
+        padding: 0 0 0 2rem;
+      }
+
       .btn {
         @include mat.button-overrides(
           (
@@ -122,6 +140,7 @@
     }
 
     @include respond(phone) {
+      grid-template-columns: 1fr auto auto;
       gap: 1rem;
       padding-right: 2.4rem;
 

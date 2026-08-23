@@ -4,9 +4,14 @@
     (searchClicked)="
       this.router.navigate(['/jobs'], {
         queryParams: $event,
+        queryParamsHandling: 'merge',
       })
     "
   />
 
-  <app-jobs-list [jobs]="jobsStore.filteredJobs()" />
+  <app-jobs-list
+    [jobs]="jobsStore.visibleJobs()"
+    [hasMore]="jobsStore.hasMore()"
+    (loadMoreClicked)="onLoadMore()"
+  />
 </section>

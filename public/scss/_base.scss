@@ -59,3 +59,31 @@ html {
     padding-inline: 2.4rem;
   }
 }
+
+.sr-only {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  pointer-events: none;
+  opacity: 0;
+  padding: 0;
+  margin-left: -1px;
+}
+
+::-webkit-scrollbar {
+  width: .8rem;
+  height: .4rem;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  cursor: pointer;
+  background-color: var(--primary-400);
+
+  &:hover {
+    background-color: var(--primary-100);
+  }
+}
