@@ -16,7 +16,14 @@ html {
     container-text-weight: 400,
     container-height: 8rem,
     leading-icon-color: var(--primary-400),
+    state-layer-color: light-dark(rgba(25, 32, 45), rgba(255, 255, 255)),
+    hover-state-layer-opacity: .05,
+    focus-state-layer-opacity: .1,
   ));
+
+  .mat-mdc-form-field-focus-overlay {
+    transition: all .35s ease-in-out;
+  }
 
   .mdc-text-field--no-label:not(.mdc-text-field--textarea) .mat-mdc-form-field-input-control.mdc-text-field__input {
     height: 2rem;
@@ -41,6 +48,7 @@ html {
   }
 
   @include respond(phone) {
+
     @include mat.form-field-overrides((
       container-text-line-height: 1.6rem,
       container-height: 7.2rem,

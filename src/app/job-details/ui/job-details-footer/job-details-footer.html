@@ -3,5 +3,12 @@
     <h2 class="heading heading--md">{{ position() }}</h2>
     <p class="text">{{ company() }}</p>
   </div>
-  <button class="btn btn--primary" matButton="filled">Apply Now</button>
+  <a
+    class="btn btn--primary"
+    matButton="filled"
+    [href]="apply()"
+    target="__blank"
+    aria-label="Apply on company's website"
+    >Apply Now</a
+  >
 </footer>

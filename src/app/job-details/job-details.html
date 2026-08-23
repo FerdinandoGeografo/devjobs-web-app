@@ -10,5 +10,9 @@
 </section>
 
 @if (job) {
-  <app-job-details-footer [position]="job!.position" [company]="job!.company" />
+  <app-job-details-footer
+    [position]="job!.position"
+    [company]="job!.company"
+    [apply]="job!.apply"
+  />
 }

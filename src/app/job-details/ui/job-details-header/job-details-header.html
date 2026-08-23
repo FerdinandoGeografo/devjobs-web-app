@@ -9,7 +9,13 @@
       </p>
       <p class="text">{{ companyUrl() }}</p>
     </div>
-    <a class="btn btn--secondary" matButton="filled" [href]="job().website" target="__blank">
+    <a
+      class="btn btn--secondary"
+      matButton="filled"
+      [href]="job().website"
+      target="__blank"
+      aria-label="Visit company website"
+    >
       Company Site
     </a>
   </div>

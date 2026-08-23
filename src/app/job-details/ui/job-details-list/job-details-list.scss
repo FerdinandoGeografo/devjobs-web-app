@@ -11,7 +11,7 @@
   }
 
   .text {
-    color: var(--neutral-600);
+    color: light-dark(var(--neutral-600), var(--neutral-300));
   }
 
   .list {

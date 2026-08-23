@@ -11,4 +11,5 @@ import { Job } from '../../../shared/models/job';
 export class JobDetailsFooter {
   position = input.required<Job['position']>();
   company = input.required<Job['company']>();
+  apply = input.required<Job['apply']>();
 }

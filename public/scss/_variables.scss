@@ -1,3 +1,5 @@
+@use './media' as *;
+
 :root {
   --neutral-0: #fff;
   --neutral-100: #f4f6f8;
@@ -8,4 +10,16 @@
   --primary-400: rgb(89, 100, 224);
   --primary-700: #19202d;
   --primary-900: #121721;
+
+  --header-height: 16.2rem;
+  --overlap: 4rem;
+  --z-index-overlay: 99;
+
+  @include respond(tablet) {
+    --header-height: 16rem;
+  }
+
+  @include respond(phone) {
+    --header-height: 13.6rem;
+  }
 }

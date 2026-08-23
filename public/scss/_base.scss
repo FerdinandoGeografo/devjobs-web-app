@@ -51,6 +51,13 @@ html {
     padding-inline: 3.5rem;
   }
 
+  &--fixed {
+    position: fixed;
+    inset: var(--header-height) 0 auto 0;
+    z-index: var(--z-index-overlay);
+    transform: translateY(calc(-1 * var(--overlap)));
+  }
+
   @include respond(tablet) {
     padding-inline: 3.95rem;
   }
@@ -71,8 +78,8 @@ html {
 }
 
 ::-webkit-scrollbar {
-  width: .8rem;
-  height: .4rem;
+  width: 2px;
+  height: 4px;
 }
 
 ::-webkit-scrollbar-track {

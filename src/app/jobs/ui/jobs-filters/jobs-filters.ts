@@ -24,6 +24,9 @@ import { JobsFiltersDialog } from '../jobs-filters-dialog/jobs-filters-dialog';
   ],
   templateUrl: `./jobs-filters.html`,
   styleUrl: `./jobs-filters.scss`,
+  host: {
+    class: 'container container--lg container--fixed',
+  },
 })
 export class JobsFilters {
   private dialog = inject(MatDialog);

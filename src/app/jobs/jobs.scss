@@ -2,20 +2,25 @@
 @use '../../../public/scss/_media.scss' as *;
 
 :host {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+
   .jobs {
-    position: relative;
+    flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 10.5rem;
+    padding-top: 14.4rem;
     padding-bottom: 6.4rem;
 
     @include respond(tablet) {
-      gap: 7rem;
+      padding-top: 11rem;
       padding-bottom: 2rem;
     }
 
     @include respond(phone) {
-      gap: 5.7rem;
+      padding-top: 9.7rem;
     }
   }
 }

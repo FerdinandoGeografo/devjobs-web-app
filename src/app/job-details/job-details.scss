@@ -1,13 +1,31 @@
+@use '../../../public/scss/media' as *;
+
 :host {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  min-height: 100%;
+  overflow-y: auto;
 
   .job {
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 3.2rem;
+    padding-top: 13.1rem;
     padding-bottom: 8rem;
+  }
+
+  @include respond(tablet) {
+    .job {
+      padding-top: 13.2rem
+    }
+  }
+
+  @include respond(phone) {
+    --overlap: 1.5rem;
+
+    .job {
+      padding-top: 21.4rem;
+      padding-bottom: 5.3rem;
+    }
   }
 }

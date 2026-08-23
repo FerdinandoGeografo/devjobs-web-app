@@ -2,11 +2,6 @@
 @use '../../../../../public/scss/_media.scss' as *;
 
 :host {
-  position: sticky;
-  top: 0;
-  z-index: 1;
-  display: block;
-
   .job {
     display: flex;
     background-color: light-dark(var(--neutral-0), var(--primary-700));

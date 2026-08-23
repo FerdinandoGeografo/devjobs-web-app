@@ -9,7 +9,15 @@
       <h1 class="job__position heading heading--xl">{{ job().position }}</h1>
       <p class="job__location heading heading--sm">{{ job().location }}</p>
     </div>
-    <button class="btn btn--primary" matButton="filled">Apply Now</button>
+    <a
+      class="btn btn--primary"
+      matButton="filled"
+      [href]="job().apply"
+      target="__blank"
+      aria-label="Apply job on company's website"
+    >
+      Apply Now
+    </a>
   </div>
 
   <p class="text">
