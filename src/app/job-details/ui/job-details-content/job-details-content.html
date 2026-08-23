@@ -25,6 +25,6 @@
     {{ job().description }}
   </p>
 
-  <app-job-details-list title="Requirements" [jobMetadata]="job().requirements" />
-  <app-job-details-list title="What You Will Do" [jobMetadata]="job().role" bulletMode="numeric" />
+  <app-job-details-list title="Requirements" [jobSection]="job().requirements" />
+  <app-job-details-list title="What You Will Do" [jobSection]="job().role" bulletMode="numeric" />
 </article>
