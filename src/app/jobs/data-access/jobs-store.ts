@@ -1,11 +1,12 @@
 import { httpResource } from '@angular/common/http';
 import { computed, Service, signal } from '@angular/core';
-import { Job } from '../../shared/models/job';
+import { Job, JOBS_PAGE_SIZE } from '../../shared/types/job';
+import { Filter, INITIAL_FILTER } from '../types/filter';
 
 @Service()
 export class JobsStore {
   private jobsResource = httpResource<Job[]>(() => 'data/data.json', { defaultValue: [] });
-  readonly #filter = signal<IJobsFilters>(initialFilter);
+  readonly #filter = signal<Filter>(INITIAL_FILTER);
   readonly #limit = signal(JOBS_PAGE_SIZE);
 
   readonly loading = this.jobsResource.isLoading;
@@ -35,7 +36,7 @@ export class JobsStore {
   visibleJobs = computed(() => this.filteredJobs().slice(0, this.limit()));
   hasMore = computed(() => this.filteredJobs().length > this.limit());
 
-  setFilter(filter: IJobsFilters) {
+  setFilter(filter: Filter) {
     this.#filter.set(filter);
   }
 
@@ -43,17 +44,3 @@ export class JobsStore {
     this.#limit.set(limit);
   }
 }
-
-export interface IJobsFilters {
-  query: string;
-  location: string;
-  fullTimeOnly: boolean;
-}
-
-export const JOBS_PAGE_SIZE = 12;
-
-const initialFilter: IJobsFilters = {
-  query: '',
-  location: '',
-  fullTimeOnly: false,
-};

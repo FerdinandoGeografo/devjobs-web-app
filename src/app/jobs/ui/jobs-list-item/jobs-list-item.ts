@@ -1,5 +1,5 @@
 import { Component, input } from '@angular/core';
-import { Job } from '../../../shared/models/job';
+import { Job } from '../../../shared/types/job';
 import { RouterLink } from '@angular/router';
 
 @Component({

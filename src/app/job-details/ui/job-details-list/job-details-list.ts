@@ -1,5 +1,5 @@
 import { Component, input } from '@angular/core';
-import { JobSection } from '../../../shared/models/job';
+import { JobSection } from '../../../shared/types/job';
 
 @Component({
   selector: 'app-job-details-list',

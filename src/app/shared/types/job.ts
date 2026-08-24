@@ -1,4 +1,4 @@
-export interface Job {
+export type Job = {
   id: number;
   company: string;
   logo: string;
@@ -12,9 +12,11 @@ export interface Job {
   description: string;
   requirements: JobSection;
   role: JobSection;
-}
+};
 
-export interface JobSection {
+export type JobSection = {
   content: string;
   items: string[];
-}
+};
+
+export const JOBS_PAGE_SIZE = 12;

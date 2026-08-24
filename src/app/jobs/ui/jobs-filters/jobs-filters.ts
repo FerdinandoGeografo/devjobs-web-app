@@ -1,26 +1,28 @@
 import { Component, computed, effect, inject, model, output, signal } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatDividerModule } from '@angular/material/divider';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input';
-import { IJobsFilters } from '../../data-access/jobs-store';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { BreakpointsStore } from '../../../shared/data-access/breakpoints.store';
 import { form, FormField, submit } from '@angular/forms/signals';
+import { MatButton, MatIconButton } from '@angular/material/button';
+import { MatCheckbox } from '@angular/material/checkbox';
+import { MatDivider } from '@angular/material/divider';
+import { MatFormField } from '@angular/material/form-field';
+import { MatIcon } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+
+import { Filter } from '../../types/filter';
+import { BreakpointsStore } from '../../../shared/data-access/breakpoints.store';
 import { JobsFiltersDialog } from '../jobs-filters-dialog/jobs-filters-dialog';
 
 @Component({
   selector: 'app-jobs-filters',
   imports: [
-    MatFormFieldModule,
-    MatIconModule,
-    MatInputModule,
-    MatCheckboxModule,
-    MatButtonModule,
-    MatDividerModule,
     FormField,
+    MatFormField,
+    MatIcon,
+    MatInputModule,
+    MatCheckbox,
+    MatIconButton,
+    MatButton,
+    MatDivider,
   ],
   templateUrl: `./jobs-filters.html`,
   styleUrl: `./jobs-filters.scss`,
@@ -33,9 +35,9 @@ export class JobsFilters {
   private dialog = inject(MatDialog);
   protected readonly brStore = inject(BreakpointsStore);
 
-  private dialogRef = signal<MatDialogRef<JobsFiltersDialog, IJobsFilters> | null>(null);
-  readonly filter = model.required<IJobsFilters>();
-  readonly searchClicked = output<IJobsFilters>();
+  private dialogRef = signal<MatDialogRef<JobsFiltersDialog, Filter> | null>(null);
+  readonly filter = model.required<Filter>();
+  readonly searchClicked = output<Filter>();
 
   protected readonly filtersForm = form(this.filter);
 
@@ -70,7 +72,7 @@ export class JobsFilters {
       maxWidth: '87.2vw',
     });
     this.dialogRef.set(ref);
-    ref.afterClosed().subscribe((res: IJobsFilters | null) => {
+    ref.afterClosed().subscribe((res: Filter | null) => {
       this.dialogRef.set(null);
       if (res !== null) this.searchClicked.emit(res);
     });

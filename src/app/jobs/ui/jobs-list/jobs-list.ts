@@ -1,6 +1,6 @@
 import { Component, input, output } from '@angular/core';
 import { MatButton } from '@angular/material/button';
-import { Job } from '../../../shared/models/job';
+import { Job } from '../../../shared/types/job';
 import { JobsListItem } from '../jobs-list-item/jobs-list-item';
 import { LoaderBox } from '../../../shared/ui/loader-box/loader-box';
 import { EmptyBox } from '../../../shared/ui/empty-box/empty-box';

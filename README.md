@@ -14,9 +14,6 @@ This is a solution to the [Devjobs web app challenge on Frontend Mentor](https:/
   - [Continued development](#continued-development)
   - [Useful resources](#useful-resources)
 - [Author](#author)
-- [Acknowledgments](#acknowledgments)
-
-**Note: Delete this note and update the table of contents based on what sections you keep.**
 
 ## Overview
 
@@ -32,20 +29,17 @@ Users should be able to:
 
 ### Screenshot
 
-![./preview.jpg](./screenshot.jpg)
-
-Add a screenshot of your solution. The easiest way to do this is to use Firefox to view your project, right-click the page and select "Take a Screenshot". You can choose either a full-height screenshot or a cropped one based on how long the page is. If it's very long, it might be best to crop it.
-
-Alternatively, you can use a tool like [FireShot](https://getfireshot.com/) to take the screenshot. FireShot has a free option, so you don't need to purchase it.
-
-Then crop/optimize/edit your image however you like, add it to your project, and update the file path in the image above.
-
-**Note: Delete this note and the paragraphs above when you add your screenshot. If you prefer not to add a screenshot, feel free to remove this entire section.**
+- ![Jobs | Desktop | Light](./screenshots/jobs-light.png)
+- ![Jobs | Desktop | Dark](./screenshots/jobs-dark.png)
+- ![Jobs | Mobile | Light](./screenshots/jobs-mobile-light.png)
+- ![Jobs filter | Mobile | Dark](./screenshots/filter-mobile-dark.png)
+- ![Job Details | Desktop | Light](./screenshots/details-light.png)
+- ![Job Details | Mobile | Dark](./screenshots/details-mobile-dark.png)
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+- Solution URL: [GitHub Repository](https://github.com/FerdinandoGeografo/devjobs-web-app)
+- Live Site URL: [DevJobs](https://devjobs-web-app-fg.vercel.app/)
 
 ## My process
 
@@ -53,64 +47,112 @@ Then crop/optimize/edit your image however you like, add it to your project, and
 
 - Semantic HTML5 markup
 - CSS custom properties
-- Flexbox
-- CSS Grid
-- Mobile-first workflow
-- [React](https://reactjs.org/) - JS library
-- [Next.js](https://nextjs.org/) - React framework
-- [Styled Components](https://styled-components.com/) - For styles
-
-**Note: These are just examples. Delete this note and replace the list above with your own choices**
+- SASS / SCSS | BEM
+- Native CSS Animations via `animate.enter`,
+- Desktop-first workflow
+- [TypeScript](https://www.typescriptlang.org/) - JS superset
+- [Angular (v22)](https://angular.dev/) - Frontend Typescript Framework
+- [Angular Material & CDK](https://material.angular.dev/) - UI Components libraries
 
 ### What I learned
 
-Use this section to recap over some of your major learnings while working through this project. Writing these out and providing code samples of areas you want to highlight is a great way to reinforce your own knowledge.
+I kept my usal feature-based folder structure for this challenge: each feature gets its own `data-access` (signal based store services), `ui` (dumb components) and, when it makes sense, `types` and utilities. It keeps every feature\routed component self-contained and easy to navigate without having to guess where a piece of logic lives.
 
-To see how you can add code snippets, see below:
+Filters and pagination are driven entirely by the **URL**, which I treat as the single source of truth:
+the option `withComponentInputBinding()` maps `query`, `logcation`, `fullTimeOnly` and `limit` straight from the route's query params onto `Jobs`' inputs, and two effects synchronize them with `JobsStore`:
 
-```html
-<h1>Some HTML code I'm proud of</h1>
-```
+```ts
+readonly query = input<string>();
+readonly location = input<string>();
+readonly fullTimeOnly = input(false, { transform: booleanAttribute });
+readonly limit = input(JOBS_PAGE_SIZE, { transform: transformLimit });
 
-```css
-.proud-of-this-css {
-  color: papayawhip;
+constructor() {
+  effect(() => {
+    this.jobsStore.setFilter({
+      query: this.query() ?? '',
+      location: this.location() ?? '',
+      fullTimeOnly: this.fullTimeOnly(),
+    });
+  });
+
+  effect(() => {
+    this.jobsStore.setLimit(this.limit());
+  });
 }
 ```
 
-```js
-const proudOfThisFunc = () => {
-  console.log('🎉');
-};
+`jobsStore.filter()` then flows down into `JobsFilters` as a `model()` input, which is exactly what gets handed to `form()` to build the **Signal Form** - so the form is always initialized from whatever the URL currently says.
+
+Submitting the filters doesn't touch the store directly: it reads the form's model value and asks the router to navigate:
+
+```ts
+protected onSearch(filter: Filter) {
+  this.router.navigate(['/jobs'], {
+    queryParams: { ...filter, limit: this.jobsStore.limit() },
+    queryParamsHandling: 'merge',
+  });
+}
 ```
 
-If you want more help with writing markdown, we'd recommend checking out [The Markdown Guide](https://www.markdownguide.org/) to learn more.
+The navigation itself is what triggers the search. No manual "refresh" call anywhere, and as a side benefit filters and pagination are shareable/bookmarkable and survive a page reload for free.
 
-**Note: Delete this note and the content within this section and replace with your own learnings.**
+The main thing I wanted to practice was **Angular Signal Forms**, stable in `v22`. I used them to drive jobs filters, and the part I liked the most is how naturally the `FieldTree` ,that a `form()` returns, can be shared.
+The desktop layout renders location and full-time as inline fields, while on mobile the same fields live inside a `MatDialog`. Instead of duplicating state or syncing a draft back and forth, I just pass the relevant `FieldTree` nodes through `MAT_DIALOG_DATA` - the dialog binds to the very same signals, so there is a single source of truth:
+
+```ts
+protected openMoreFilters() {
+  const ref = this.dialog.open(JobsFiltersDialog, {
+    data: this.filtersForm,
+    width: '100%',
+    maxWidth: '87.2vw',
+  });
+  this.dialogRef.set(ref);
+  ref.afterClosed().subscribe((res: Filter | null) => {
+    this.dialogRef.set(null);
+    if (res !== null) this.searchClicked.emit(res);
+  });
+}
+```
+
+I paid attention to was **where global state should live**: things like the color theme or the current breakpoint are cross-cutting UI concerns, so they got their own stores under `shared/data-access`.
+
+Last, I used this challenge to practice Angular's native CSS-driven enter animations; I put together:
+
+- a single `_animations.scss` partial;
+- shared timing/easing custom variables;
+- a small set of `fade-in-*`/`bounce-in-*` keyframes;
+- a `.animate--stagger` modifier driven by a `--index` custom property so items can animate one after another.
+
+```scss
+&--stagger {
+  animation-delay: min(
+    calc(var(--index, 0) * var(--animation-stagger, 35ms)),
+    var(--animation-stagger-max, 350ms)
+  );
+}
+```
+
+```html
+<li animate.enter="animate animate--stagger animate--bounce-in-top" [style.--index]="$index">
+  <app-jobs-list-item [job]="job" />
+</li>
+```
+
+`prefers-reduced-motion` is handled once, inside the shared `.animate` class itself, so every animation applied through `animate.enter` is automatically muted for users who asked for reduced motion.
 
 ### Continued development
 
-Use this section to outline areas that you want to continue focusing on in future projects. These could be concepts you're still not completely comfortable with or techniques you found useful that you want to refine and perfect.
-
-**Note: Delete this note and the content within this section and replace with your own plans for continued development.**
+The project is intentionally front-end only, but the most natural next step would be to put a real API behind it and move filtering, searching and pagination (the limit query param) server-side, instead of running them client-side over the full dataset every time. It would also be a good excuse to revisit JobsStore around httpResource's request-reactivity instead of the current signal-based filter/limit combo.
 
 ### Useful resources
 
-- [Example resource 1](https://www.example.com) - This helped me for XYZ reason. I really liked this pattern and will use it going forward.
-- [Example resource 2](https://www.example.com) - This is an amazing article which helped me finally understand XYZ. I'd recommend it to anyone still learning this concept.
+- [Angular Signal Forms](https://angular.dev/guide/forms/signals/overview) - the official guide to Signal Forms; this is what the jobs filters are built on, shared as-is between the desktop layout and the mobile filters dialog.
 
-**Note: Delete this note and replace the list above with resources that helped you during the challenge. These could come in handy for anyone viewing your solution or for yourself when you look back on this project in the future.**
+- [Enter and Leave animations](https://angular.dev/guide/animations) - Angular's guide to animate.enter/animate.leave, the native CSS-based replacement for @angular/animations. Used for every entrance animation and stagger effect in the app.
 
 ## Author
 
-- Website - [Add your name here](https://www.your-site.com)
-- Frontend Mentor - [@yourusername](https://www.frontendmentor.io/profile/yourusername)
-- Twitter - [@yourusername](https://www.twitter.com/yourusername)
-
-**Note: Delete this note and add/remove/edit lines above based on what links you'd like to share.**
-
-## Acknowledgments
-
-This is where you can give a hat tip to anyone who helped you out on this project. Perhaps you worked in a team or got some inspiration from someone else's solution. This is the perfect place to give them some credit.
-
-**Note: Delete this note and edit this section's content as necessary. If you completed this challenge by yourself, feel free to delete this section entirely.**
+- Frontend Mentor - [@FerdinandoGeografo](https://www.frontendmentor.io/profile/FerdinandoGeografo)
+- LinkedIn - [@FerdinandoGeografo](https://www.linkedin.com/in/ferdinandogeografo/)
+- GitHub - [@FerdinandoGeografo](https://github.com/FerdinandoGeografo/)

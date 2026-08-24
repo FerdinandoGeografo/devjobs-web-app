@@ -1,9 +1,11 @@
 import { Component, inject, input, effect, booleanAttribute, numberAttribute } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { IJobsFilters, JOBS_PAGE_SIZE, JobsStore } from './data-access/jobs-store';
+import { JobsStore } from './data-access/jobs-store';
 import { JobsList } from './ui/jobs-list/jobs-list';
 import { JobsFilters } from './ui/jobs-filters/jobs-filters';
+import { Filter } from './types/filter';
+import { JOBS_PAGE_SIZE } from '../shared/types/job';
 
 function transformLimit(value: string | number | undefined): number {
   const limit = numberAttribute(value);
@@ -41,11 +43,11 @@ export class Jobs {
     });
   }
 
-  protected onSearch(filter: IJobsFilters) {
+  protected onSearch(filter: Filter) {
     this.router.navigate(['/jobs'], {
       queryParams: {
         ...filter,
-        limit: JOBS_PAGE_SIZE,
+        limit: this.jobsStore.limit(),
       },
       queryParamsHandling: 'merge',
     });
