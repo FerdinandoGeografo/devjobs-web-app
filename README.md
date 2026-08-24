@@ -29,12 +29,12 @@ Users should be able to:
 
 ### Screenshot
 
-- ![Jobs | Desktop | Light](./screenshots/jobs-light.png)
-- ![Jobs | Desktop | Dark](./screenshots/jobs-dark.png)
-- ![Jobs | Mobile | Light](./screenshots/jobs-mobile-light.png)
-- ![Jobs filter | Mobile | Dark](./screenshots/filter-mobile-dark.png)
-- ![Job Details | Desktop | Light](./screenshots/details-light.png)
-- ![Job Details | Mobile | Dark](./screenshots/details-mobile-dark.png)
+![Jobs | Desktop | Light](./screenshots/jobs-light.png)
+![Jobs | Desktop | Dark](./screenshots/jobs-dark.png)
+![Jobs | Mobile | Light](./screenshots/jobs-mobile-light.png)
+![Jobs filter | Mobile | Dark](./screenshots/filter-mobile-dark.png)
+![Job Details | Desktop | Light](./screenshots/details-light.png)
+![Job Details | Mobile | Dark](./screenshots/details-mobile-dark.png)
 
 ### Links
 
