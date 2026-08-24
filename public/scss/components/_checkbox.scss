@@ -50,6 +50,7 @@ html {
   }
 
   .mat-mdc-checkbox .mat-internal-form-field-label {
+    white-space: nowrap;
     transition: color .35s ease-in-out;
     margin: 3px 0 5px 0;
     padding-left: 1.6rem;
