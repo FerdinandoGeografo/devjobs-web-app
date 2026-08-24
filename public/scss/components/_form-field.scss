@@ -54,14 +54,10 @@ html {
       container-height: 7.2rem,
     ));
 
-    .mdc-text-field--no-label:not(.mdc-text-field--textarea) .mat-mdc-form-field-input-control.mdc-text-field__input {
-      height: 1.6rem;
-    }
-
     .mdc-text-field--no-label {
       .mat-mdc-form-field-infix {
-        padding-top: 2.7rem;
-        padding-bottom: 2.9rem;
+        padding-top: 2.4rem;
+        padding-bottom: 2.8rem;
       }
     }
   }
