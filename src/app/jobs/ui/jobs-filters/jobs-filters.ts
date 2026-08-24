@@ -26,6 +26,7 @@ import { JobsFiltersDialog } from '../jobs-filters-dialog/jobs-filters-dialog';
   styleUrl: `./jobs-filters.scss`,
   host: {
     class: 'container container--lg container--fixed',
+    'animate.enter': 'animate animate--bounce-in',
   },
 })
 export class JobsFilters {
@@ -66,7 +67,7 @@ export class JobsFilters {
     const ref = this.dialog.open(JobsFiltersDialog, {
       data: this.filtersForm,
       width: '100%',
-      maxWidth: '87vw',
+      maxWidth: '87.2vw',
     });
     this.dialogRef.set(ref);
     ref.afterClosed().subscribe((res: IJobsFilters | null) => {

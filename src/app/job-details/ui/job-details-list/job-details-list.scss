@@ -7,11 +7,13 @@
 
   .heading--md {
     line-height: 1;
-    color: var(--primary-700);
+    color: light-dark(var(--primary-700), var(--neutral-0));
+    transition: color .35s ease-in-out;
   }
 
   .text {
     color: light-dark(var(--neutral-600), var(--neutral-300));
+    transition: color .35s ease-in-out;
   }
 
   .list {

@@ -3,11 +3,16 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    padding-block: 1.2rem;
+    background-color: light-dark(var(--neutral-100), var(--primary-700));
+    border-radius: 6px;
     gap: .6rem;
+    transition: background-color .35s ease-in-out;
 
     &__text {
       display: contents;
-      color: light-dark(var(--neutral-900), var(--neutral-0));
+      color: light-dark(var(--primary-900), var(--neutral-0));
+      transition: color .35s ease-in-out;
     }
 
     &__link {
@@ -15,8 +20,9 @@
         font-weight: 700;
         text-decoration: none;
         outline: 0 none;
-        color: light-dark(var(--red-700), var(--red-400));;
+        color: light-dark(var(--primary-600), var(--primary-400));
         position: relative;
+        transition: color .45s ease-in-out;
 
         &::after {
           content: "";
@@ -31,6 +37,7 @@
       }
 
       &:hover, &:active, &:focus {
+        color: var(--primary-100);
         &::after {
           transform: scaleX(1);
         }

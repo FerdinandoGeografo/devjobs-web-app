@@ -32,12 +32,6 @@
       align-items: center;
       justify-content: space-between;
       gap: 2.6rem;
-
-      @include mat.button-overrides(
-        (
-          filled-horizontal-padding: 3.55rem,
-        )
-      );
     }
 
     &__checkbox {
@@ -49,26 +43,11 @@
     &__trigger {
       align-self: center;
 
-      &::ng-deep .mdc-icon-button__ripple::before {
-        transition: all 0.35s ease-in-out;
-      }
-
-      .mat-icon {
-        --size: 2rem;
-        width: var(--size);
-        height: var(--size);
-        font-size: var(--size);
-      }
-
       @include mat.icon-button-overrides(
         (
           icon-size: 2rem,
-          touch-target-size: 4.8rem,
-          state-layer-size: 4.8rem,
-          container-shape: 5px,
-          state-layer-color: light-dark(var(--neutral-100), var(--primary-700)),
-          hover-state-layer-opacity: 1,
-          focus-state-layer-opacity: 1,
+          icon-color: light-dark(var(--neutral-600), var(--neutral-0)),
+          state-layer-color: light-dark(var(--neutral-100), var(--neutral-600)),
         )
       );
     }
@@ -77,20 +56,11 @@
       align-self: center;
       background-color: var(--primary-400);
 
-      &::ng-deep .mdc-icon-button__ripple::before {
-        transition: all 0.35s ease-in-out;
-      }
-
       @include mat.icon-button-overrides(
         (
           icon-size: 2.4rem,
-          touch-target-size: 4.8rem,
-          container-shape: 5px,
           icon-color: var(--neutral-0),
           state-layer-color: var(--primary-100),
-          state-layer-size: 4.8rem,
-          hover-state-layer-opacity: 1,
-          focus-state-layer-opacity: 1,
         )
       );
     }
@@ -104,13 +74,7 @@
     }
 
     @include respond(tablet) {
-      &__query {
-        &::ng-deep .mat-mdc-form-field-icon-prefix .mat-icon {
-          padding: 0 1.6rem 0 2.4rem;
-        }
-      }
-
-      &__location {
+      &__query, &__location {
         &::ng-deep .mat-mdc-form-field-icon-prefix .mat-icon {
           padding: 0 1.6rem 0 2.4rem;
         }

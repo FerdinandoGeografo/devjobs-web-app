@@ -1,6 +1,10 @@
 <app-header>
-  <app-logo />
-  <app-theme-slide-toggle [darkTheme]="store.darkTheme()" (darkThemeChange)="store.toggleTheme()" />
+  <app-logo animate.enter="animate animate--bounce-in-left" />
+  <app-theme-slide-toggle
+    animate.enter="animate animate--bounce-in-right"
+    [darkTheme]="store.darkTheme()"
+    (darkThemeChange)="store.toggleTheme()"
+  />
 </app-header>
 
 <main class="main">

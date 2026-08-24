@@ -1,15 +1,27 @@
 <article class="job">
   <div class="job__heading-box">
-    <div class="job__text">
-      <div class="job__data">
+    <div class="job__text" [style.--index]="2">
+      <div class="job__data" animate.enter="animate animate--stagger animate--fade-in-left">
         <p class="text">{{ job().postedAt }}</p>
         <div aria-hidden="true"></div>
         <p class="text">{{ job().contract }}</p>
       </div>
-      <h1 class="job__position heading heading--xl">{{ job().position }}</h1>
-      <p class="job__location heading heading--sm">{{ job().location }}</p>
+      <h1
+        animate.enter="animate animate--stagger animate--fade-in-right"
+        class="job__position heading heading--xl"
+      >
+        {{ job().position }}
+      </h1>
+      <p
+        animate.enter="animate animate--stagger animate--fade-in-left"
+        class="job__location heading heading--sm"
+      >
+        {{ job().location }}
+      </p>
     </div>
     <a
+      [style.--index]="3"
+      animate.enter="animate animate--stagger animate--bounce-in-top"
       class="btn btn--primary"
       matButton="filled"
       [href]="job().apply"
@@ -21,10 +33,19 @@
     </a>
   </div>
 
-  <p class="text">
+  <p [style.--index]="4" class="text" animate.enter="animate animate--fade-in animate--stagger">
     {{ job().description }}
   </p>
 
-  <app-job-details-list title="Requirements" [jobSection]="job().requirements" />
-  <app-job-details-list title="What You Will Do" [jobSection]="job().role" bulletMode="numeric" />
+  <app-job-details-list
+    animate.enter="animate animate--fade-in-bottom"
+    title="Requirements"
+    [jobSection]="job().requirements"
+  />
+  <app-job-details-list
+    animate.enter="animate animate--fade-in-bottom"
+    title="What You Will Do"
+    [jobSection]="job().role"
+    bulletMode="numeric"
+  />
 </article>
