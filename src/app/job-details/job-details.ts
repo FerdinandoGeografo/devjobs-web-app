@@ -4,11 +4,12 @@ import { JobDetailsStore } from './data-access/job-details-store';
 import { JobDetailsContent } from './ui/job-details-content/job-details-content';
 import { JobDetailsFooter } from './ui/job-details-footer/job-details-footer';
 import { JobDetailsHeader } from './ui/job-details-header/job-details-header';
-import { EmptyBox } from '../shared/ui/empty-box';
+import { EmptyBox } from '../shared/ui/empty-box/empty-box';
+import { LoaderBox } from '../shared/ui/loader-box/loader-box';
 
 @Component({
   selector: 'app-job-details',
-  imports: [JobDetailsHeader, JobDetailsContent, JobDetailsFooter, EmptyBox],
+  imports: [JobDetailsHeader, JobDetailsContent, JobDetailsFooter, EmptyBox, LoaderBox],
   templateUrl: './job-details.html',
   styleUrl: `./job-details.scss`,
 })

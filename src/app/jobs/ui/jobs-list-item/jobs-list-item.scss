@@ -17,7 +17,8 @@
     outline: 0 none;
     transition:
       background-color 0.35s ease-in-out,
-      box-shadow 0.35s ease-in-out;
+      box-shadow 0.35s ease-in-out,
+      transform 0.45s ease-in-out;
 
     @include respond(tablet) {
       padding-right: 2.1rem;
@@ -29,6 +30,12 @@
 
     &:hover,
     &:focus {
+      transform: translateY(-4px);
+
+      .job__logo {
+        scale: 1.15;
+      }
+
       .job__position {
         color: light-dark(var(--neutral-300), var(--neutral-600));
       }
@@ -45,6 +52,7 @@
       height: 5rem;
       border-radius: 1.5rem;
       transform: translateY(-50%);
+      transition: scale .45s ease-in-out;
     }
 
     &__data {

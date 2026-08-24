@@ -1,21 +1,24 @@
 @if (loading()) {
-  <p class="heading heading--md">Loading...</p>
+  <app-loader-box />
+} @else if (jobs().length === 0) {
+  <app-empty-box emptyMessage="No jobs found. Please retry..." />
 } @else {
-  @if (jobs().length === 0) {
-    <app-empty-box emptyMessage="No jobs found. Please retry..." />
-  } @else {
-    <ul class="jobs">
-      @for (job of jobs(); track job.id) {
-        <li>
-          <app-jobs-list-item [job]="job" />
-        </li>
-      }
-    </ul>
-
-    @if (hasMore()) {
-      <button class="btn btn--primary" matButton="filled" (click)="loadMoreClicked.emit()">
-        Load More
-      </button>
+  <ul class="jobs">
+    @for (job of jobs(); track job.id) {
+      <li animate.enter="animate animate--stagger animate--bounce-in-top" [style.--index]="$index">
+        <app-jobs-list-item [job]="job" />
+      </li>
     }
+  </ul>
+
+  @if (hasMore()) {
+    <button
+      animate.enter="animate animate--bounce-in-top"
+      class="btn btn--primary"
+      matButton="filled"
+      (click)="loadMoreClicked.emit()"
+    >
+      Load More
+    </button>
   }
 }

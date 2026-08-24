@@ -2,7 +2,7 @@
 
 <section class="job container container--md">
   @if (detailsStore.loading()) {
-    <p class="heading heading--md">Loading...</p>
+    <app-loader-box />
   } @else if (detailsStore.notFound()) {
     <app-empty-box emptyMessage="No job found. Please retry..." />
   } @else {

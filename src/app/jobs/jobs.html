@@ -2,6 +2,7 @@
   <app-jobs-filters [filter]="jobsStore.filter()" (searchClicked)="onSearch($event)" />
 
   <app-jobs-list
+    [loading]="jobsStore.loading()"
     [jobs]="jobsStore.visibleJobs()"
     [hasMore]="jobsStore.hasMore()"
     (loadMoreClicked)="onLoadMore()"
