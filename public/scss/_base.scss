@@ -68,13 +68,15 @@ html {
 }
 
 .sr-only {
-  position: absolute !important;
+  position: absolute;
   width: 1px;
   height: 1px;
-  pointer-events: none;
-  opacity: 0;
   padding: 0;
-  margin-left: -1px;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border-width: 0;
 }
 
 ::-webkit-scrollbar {

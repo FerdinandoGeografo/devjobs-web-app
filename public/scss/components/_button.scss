@@ -1,3 +1,4 @@
+@use '../media' as *;
 @use '@angular/material' as mat;
 
 .btn {
@@ -7,12 +8,28 @@
     transition: color .35s ease-in-out;
   }
 
-  .mdc-button__ripple::before {
+  .mdc-button__ripple::before, .mdc-icon-button__ripple::before {
     transition: all .35s ease-in-out;
   }
 
   &:not(:disabled):focus {
     box-shadow: 0 0 0 2px light-dark(var(--neutral-0), var(--primary-900)), 0 0 0 4px light-dark(var(--primary-400), var(--neutral-300));
+  }
+
+  &.mdc-icon-button {
+    .mat-icon {
+      width: var(--mat-icon-button-icon-size);
+      height: var(--mat-icon-button-icon-size);
+      font-size: var(--mat-icon-button-icon-size);
+    }
+
+    @include mat.icon-button-overrides((
+      touch-target-size: 4.8rem,
+      state-layer-size: 4.8rem,
+      container-shape: 5px,
+      hover-state-layer-opacity: 1,
+      focus-state-layer-opacity: 1,
+    ));
   }
 
   @include mat.button-overrides((
@@ -54,5 +71,19 @@
       filled-pressed-state-layer-opacity: 1,
       filled-state-layer-color: light-dark(rgba(89, 100, 224, .35), rgba(201, 201, 201, .75)),
     ));
+  }
+
+  @include respond(tablet) {
+    &--primary {
+      @include mat.button-overrides((
+        filled-horizontal-padding: 2.75rem,
+      ));
+    }
+
+    &--secondary {
+      @include mat.button-overrides((
+        filled-horizontal-padding: 2.05rem,
+      ));
+    }
   }
 }

@@ -8,8 +8,14 @@
 
   --primary-100: #939bf4;
   --primary-400: rgb(89, 100, 224);
+  --primary-600: rgb(60, 74, 228);
   --primary-700: #19202d;
   --primary-900: #121721;
+
+  --animation-duration: 500ms;
+  --animation-easing: ease-in-out;
+  --animation-stagger: 75ms;
+  --animation-stagger-max: 1200ms;
 
   --header-height: 16.2rem;
   --overlap: 4rem;

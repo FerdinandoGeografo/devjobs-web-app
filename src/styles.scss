@@ -1,5 +1,6 @@
 @use "../public/scss/fonts";
 @use "../public/scss/media";
+@use "../public/scss/animations.scss";
 @use "../public/scss/variables";
 @use "../public/scss/base";
 @use "../public/scss/typography";
@@ -19,6 +20,10 @@ html {
     ),
     typography: Kumbh Sans,
     density: 0,
+  ));
+
+  @include mat.progress-spinner-overrides((
+    active-indicator-color: var(--primary-400),
   ));
 
   @include mat.divider-overrides((
