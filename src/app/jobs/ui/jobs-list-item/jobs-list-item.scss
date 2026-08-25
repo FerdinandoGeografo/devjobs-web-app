@@ -1,5 +1,5 @@
 
-@use '../../../../../public/scss/_media.scss' as *;
+@use 'media' as *;
 
 :host {
   display: contents;
@@ -29,7 +29,7 @@
     }
 
     &:hover,
-    &:focus {
+    &:focus-visible {
       transform: translateY(-4px);
 
       .job__logo {
@@ -39,6 +39,10 @@
       .job__position {
         color: light-dark(var(--neutral-300), var(--neutral-600));
       }
+    }
+
+    &:focus-visible {
+      box-shadow: 0 0 0 1px light-dark(var(--primary-400), var(--neutral-300));
     }
 
     &__logo {

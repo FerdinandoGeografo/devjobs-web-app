@@ -98,19 +98,19 @@ protected onSearch(filter: Filter) {
 The navigation itself is what triggers the search. No manual "refresh" call anywhere, and as a side benefit filters and pagination are shareable/bookmarkable and survive a page reload for free.
 
 The main thing I wanted to practice was **Angular Signal Forms**, stable in `v22`. I used them to drive jobs filters, and the part I liked the most is how naturally the `FieldTree` ,that a `form()` returns, can be shared.
-The desktop layout renders location and full-time as inline fields, while on mobile the same fields live inside a `MatDialog`. Instead of duplicating state or syncing a draft back and forth, I just pass the relevant `FieldTree` nodes through `MAT_DIALOG_DATA` - the dialog binds to the very same signals, so there is a single source of truth:
+The desktop layout renders location and full-time as inline fields, while on mobile the same fields live inside a `MatDialog`:
 
 ```ts
 protected openMoreFilters() {
-  const ref = this.dialog.open(JobsFiltersDialog, {
-    data: this.filtersForm,
+  const ref = this.dialog.open<JobsFiltersDialog, Filter, Filter>(JobsFiltersDialog, {
+    data: this.filtersForm().value(),
     width: '100%',
     maxWidth: '87.2vw',
   });
   this.dialogRef.set(ref);
-  ref.afterClosed().subscribe((res: Filter | null) => {
+  ref.afterClosed().subscribe((res) => {
     this.dialogRef.set(null);
-    if (res !== null) this.searchClicked.emit(res);
+    if (res !== undefined) this.searchClicked.emit(res);
   });
 }
 ```
@@ -140,6 +140,34 @@ Last, I used this challenge to practice Angular's native CSS-driven enter animat
 ```
 
 `prefers-reduced-motion` is handled once, inside the shared `.animate` class itself, so every animation applied through `animate.enter` is automatically muted for users who asked for reduced motion.
+
+Thanks to feedback from Frontend Mentor, a useful change involved moving the `scss` folder entirely from the `public` folder to the `src` folder and renaming it `styles`. I then updated `angular.json` so that within the SCSS files of the various components —and in `styles.scss` itself— I could declare partials simply by their filenames, without needing absolute or relative paths:
+
+```json
+"styles": [
+  "src/styles/styles.scss"
+],
+"stylePreprocessorOptions": {
+  "includePaths": ["src/styles"]
+}
+...
+```
+
+then, in `styles.scss`:
+
+```scss
+@use 'fonts';
+@use 'media';
+@use 'animations';
+@use 'variables';
+@use 'base';
+@use 'typography';
+
+@use 'components/button';
+@use 'components/checkbox';
+@use 'components/form-field';
+@use 'components/slide-toggle';
+```
 
 ### Continued development
 

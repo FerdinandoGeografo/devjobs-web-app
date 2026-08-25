@@ -1,14 +1,14 @@
-@use "../public/scss/fonts";
-@use "../public/scss/media";
-@use "../public/scss/animations.scss";
-@use "../public/scss/variables";
-@use "../public/scss/base";
-@use "../public/scss/typography";
+@use "fonts";
+@use "media";
+@use "animations";
+@use "variables";
+@use "base";
+@use "typography";
 
-@use '../public/scss/components/button';
-@use '../public/scss/components/checkbox';
-@use '../public/scss/components/form-field';
-@use '../public/scss/components/slide-toggle';
+@use 'components/button';
+@use 'components/checkbox';
+@use 'components/form-field';
+@use 'components/slide-toggle';
 
 @use '@angular/material' as mat;
 

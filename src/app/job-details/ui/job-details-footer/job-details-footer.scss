@@ -1,5 +1,5 @@
 
-@use '../../../../../public/scss/_media.scss' as *;
+@use 'media' as *;
 
 :host {
   position: sticky;
@@ -40,15 +40,24 @@
         color: var(--neutral-600);
       }
     }
+  }
 
-    @include respond(tablet) {
-      padding-inline: 3.95rem;
-    }
+  @include respond(tablet) {
+    position: static;
+    inset: unset;
 
-    @include respond(phone) {
-      padding: 2.5rem 2.4rem 2.3rem;
-
+    .footer {
       &__content {
+        padding-inline: 3.95rem;
+      }
+    }
+  }
+
+  @include respond(phone) {
+    .footer {
+      &__content {
+        padding: 2.5rem 2.4rem 2.3rem;
+
         & > * {
           flex: 1;
         }
