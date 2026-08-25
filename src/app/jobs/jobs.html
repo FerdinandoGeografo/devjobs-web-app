@@ -1,4 +1,5 @@
 <section class="jobs container container--lg">
+  <h1 class="sr-only">DevJobs board</h1>
   <app-jobs-filters [filter]="jobsStore.filter()" (searchClicked)="onSearch($event)" />
 
   <app-jobs-list
