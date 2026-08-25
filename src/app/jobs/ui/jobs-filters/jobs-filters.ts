@@ -66,15 +66,15 @@ export class JobsFilters {
   }
 
   protected openMoreFilters() {
-    const ref = this.dialog.open(JobsFiltersDialog, {
-      data: this.filtersForm,
+    const ref = this.dialog.open<JobsFiltersDialog, Filter, Filter>(JobsFiltersDialog, {
+      data: this.filtersForm().value(),
       width: '100%',
       maxWidth: '87.2vw',
     });
     this.dialogRef.set(ref);
-    ref.afterClosed().subscribe((res: Filter | null) => {
+    ref.afterClosed().subscribe((res) => {
       this.dialogRef.set(null);
-      if (res !== null) this.searchClicked.emit(res);
+      if (res !== undefined) this.searchClicked.emit(res);
     });
   }
 }

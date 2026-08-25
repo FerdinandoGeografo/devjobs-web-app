@@ -1,6 +1,6 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { FieldTree, FormField } from '@angular/forms/signals';
+import { form, FormField } from '@angular/forms/signals';
 
 import { MatButton } from '@angular/material/button';
 import { MatCheckbox } from '@angular/material/checkbox';
@@ -28,8 +28,11 @@ import { Filter } from '../../types/filter';
   styleUrl: `./jobs-filters-dialog.scss`,
 })
 export class JobsFiltersDialog {
-  protected readonly filtersForm = inject<FieldTree<Filter>>(MAT_DIALOG_DATA);
+  protected readonly filters = inject<Filter>(MAT_DIALOG_DATA);
   private readonly dialogRef = inject(MatDialogRef<JobsFiltersDialog>);
+
+  protected readonly filtersModel = signal(this.filters);
+  protected readonly filtersForm = form(this.filtersModel);
 
   protected onSubmit(event: Event) {
     event.preventDefault();
